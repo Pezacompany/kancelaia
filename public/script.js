@@ -1,55 +1,91 @@
-// Pobranie parametrów z linku (token)
-const urlParams = new URLSearchParams(window.location.search);
-const token = urlParams.get('token');
-const verifyBtn = document.getElementById('verifyBtn');
+body {
+    background-color: #0e1013;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
 
-verifyBtn.addEventListener('click', async () => {
-    // Zabezpieczenie przed brakiem tokenu w URL
-    if (!token) return alert("Brak tokenu! Wygeneruj nowy link na Discordzie.");
+.auth-card {
+    background: #191b1f;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+    border: 1px solid #2d3035;
+}
 
-    // Zmiana stanu przycisku (loading)
-    verifyBtn.disabled = true;
-    verifyBtn.innerText = "Ładowanie...";
+.roblox-logo {
+    background: #232529;
+    padding: 30px;
+    text-align: center;
+    border-bottom: 1px solid #2d3035;
+}
 
-    try {
-        // 1. Pobranie kodu weryfikacyjnego z Twojego API na Vercel
-        const res = await fetch(`/api/roblox-login?token=${token}`);
-        const data = await res.json();
+.roblox-logo img {
+    width: 60px;
+}
 
-        if (data.error) throw new Error(data.error);
+.auth-content {
+    padding: 30px;
+    text-align: center;
+}
 
-        // 2. Wyświetlenie instrukcji i pobranie nicku od użytkownika
-        const username = prompt(`TWÓJ KOD: ${data.code}\n\nWklej go do opisu profilu Roblox, a potem wpisz swój nick tutaj:`);
+h1 { font-size: 22px; margin: 0 0 10px 0; }
+.gold { color: #a68b5b; }
+.subtitle { color: #888; font-size: 14px; margin-bottom: 25px; }
 
-        if (username) {
-            // 3. Wysłanie danych do sprawdzenia BIO na Roblox
-            const checkRes = await fetch('/api/check', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ token, username })
-            });
+.user-box {
+    background: #111316;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: #555;
+}
 
-            const result = await checkRes.json();
+.steps-box {
+    text-align: left;
+    background: rgba(166, 139, 91, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #a68b5b;
+    margin-bottom: 25px;
+}
 
-            // 4. Obsługa wyniku weryfikacji
-            if (result.success) {
-                alert("Zweryfikowano pomyślnie!");
-                verifyBtn.innerText = "ZWERYFIKOWANO";
-            } else {
-                alert("Błąd: " + result.message);
-                verifyBtn.disabled = false;
-                verifyBtn.innerText = "Spróbuj ponownie";
-            }
-        } else {
-            // Jeśli użytkownik zamknął okno prompt bez wpisania nicku
-            verifyBtn.disabled = false;
-            verifyBtn.innerText = "Przejdź do weryfikacji";
-        }
+.step {
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: #ccc;
+}
 
-    } catch (err) {
-        // Obsługa błędów technicznych (np. brak połączenia z bazą)
-        alert("Błąd: " + err.message);
-        verifyBtn.disabled = false;
-        verifyBtn.innerText = "Przejdź do weryfikacji";
-    }
-});
+#verifyBtn {
+    background: #ffffff;
+    color: #000;
+    border: none;
+    padding: 14px;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#verifyBtn:hover {
+    background: #a68b5b;
+    color: white;
+}
+
+.auth-footer {
+    padding: 15px;
+    font-size: 10px;
+    color: #444;
+    text-align: center;
+    background: #141619;
+}

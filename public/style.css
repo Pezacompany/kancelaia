@@ -1,36 +1,41 @@
-/* Dodaj to do swojego style.css lub podmień sekcję .user-box */
-.user-box {
-    background: #111316;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+body {
+    background-color: #0b0b0b;
+    color: white;
+    font-family: 'Segoe UI', Arial, sans-serif;
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 10px;
-    border: 1px solid #2d3035;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-.discord-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #5865F2; /* Kolor Discorda */
+.auth-container {
+    background: #191b1d;
+    padding: 40px;
+    border-radius: 4px;
+    text-align: center;
+    width: 450px;
 }
 
-#discord-id {
+.continue-btn {
+    background: #ffffff;
+    color: black;
+    border: none;
+    padding: 12px 0;
+    width: 100%;
     font-weight: bold;
-    color: #fff;
-    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
 }
 
-/* Efekt pulsowania przycisku gdy jest gotowy */
-#verifyBtn:not(:disabled) {
-    animation: pulse 2s infinite;
+.continue-btn:hover {
+    background: #ddd;
 }
 
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(166, 139, 91, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(166, 139, 91, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(166, 139, 91, 0); }
+.footer {
+    margin-top: 50px;
+    font-size: 11px;
+    color: #666;
 }

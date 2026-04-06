@@ -1,91 +1,66 @@
-body {
-    background-color: #0e1013;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+const verifyBtn = document.getElementById('verifyBtn');
+const discordIdSpan = document.getElementById('discord-id');
+
+async function loadSession() {
+    if (!token) {
+        alert("Błąd: Brak tokenu!");
+        return;
+    }
+    
+    try {
+        // Pobieramy dane o sesji z API
+        const res = await fetch(`/api/roblox-login?token=${token}`);
+        const data = await res.json();
+        
+        if (data.error) {
+            discordIdSpan.innerText = "SESJA WYGASŁA";
+            verifyBtn.disabled = true;
+        } else {
+            // Tutaj wstawiamy Discord ID użytkownika, żeby widział kogo weryfikuje
+            discordIdSpan.innerText = data.discord_id || "Wykryto sesję";
+        }
+    } catch (e) {
+        discordIdSpan.innerText = "Błąd połączenia";
+    }
 }
 
-.auth-card {
-    background: #191b1f;
-    width: 100%;
-    max-width: 420px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    overflow: hidden;
-    border: 1px solid #2d3035;
-}
+loadSession();
 
-.roblox-logo {
-    background: #232529;
-    padding: 30px;
-    text-align: center;
-    border-bottom: 1px solid #2d3035;
-}
+verifyBtn.addEventListener('click', async () => {
+    verifyBtn.disabled = true;
+    verifyBtn.innerText = "GENEROWANIE...";
 
-.roblox-logo img {
-    width: 60px;
-}
+    try {
+        const res = await fetch(`/api/roblox-login?token=${token}`);
+        const data = await res.json();
 
-.auth-content {
-    padding: 30px;
-    text-align: center;
-}
+        const robloxNick = prompt(`TWOJA AUTORYZACJA ROBLOX\n\nKOD: ${data.code}\n\n1. Wklej ten kod do Bio na Roblox.\n2. Wpisz swój nick z Roblox poniżej:`);
 
-h1 { font-size: 22px; margin: 0 0 10px 0; }
-.gold { color: #a68b5b; }
-.subtitle { color: #888; font-size: 14px; margin-bottom: 25px; }
+        if (robloxNick) {
+            verifyBtn.innerText = "SPRAWDZANIE...";
+            const checkRes = await fetch('/api/check', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token, username: robloxNick })
+            });
 
-.user-box {
-    background: #111316;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    font-size: 12px;
-    color: #555;
-}
-
-.steps-box {
-    text-align: left;
-    background: rgba(166, 139, 91, 0.05);
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 3px solid #a68b5b;
-    margin-bottom: 25px;
-}
-
-.step {
-    font-size: 13px;
-    margin-bottom: 8px;
-    color: #ccc;
-}
-
-#verifyBtn {
-    background: #ffffff;
-    color: #000;
-    border: none;
-    padding: 14px;
-    width: 100%;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-#verifyBtn:hover {
-    background: #a68b5b;
-    color: white;
-}
-
-.auth-footer {
-    padding: 15px;
-    font-size: 10px;
-    color: #444;
-    text-align: center;
-    background: #141619;
-}
+            const result = await checkRes.json();
+            if (result.success) {
+                alert("✅ KONTO POWIĄZANE POMYŚLNIE!");
+                window.location.href = "https://www.roblox.com/groups/" + process.env.GROUP_ID; // Opcjonalne przekierowanie
+            } else {
+                alert("❌ BŁĄD: " + result.message);
+                verifyBtn.disabled = false;
+                verifyBtn.innerText = "SPRÓBUJ PONOWNIE";
+            }
+        } else {
+            verifyBtn.disabled = false;
+            verifyBtn.innerText = "POBIERZ KOD I WERYFIKUJ";
+        }
+    } catch (err) {
+        alert("Błąd krytyczny API.");
+        verifyBtn.disabled = false;
+    }
+});

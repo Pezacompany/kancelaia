@@ -2,38 +2,32 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autoryzacja Roblox | Kancelaria Sejmu</title>
+    <title>Warszawa Weryfikacja</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="auth-card">
-        <div class="roblox-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_with_gradient.svg" alt="Roblox">
-        </div>
+    <div class="auth-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_with_gradient.svg" width="60">
+        <h2>Select Account to Continue to Warszawa Weryfikacja</h2>
         
-        <div class="auth-content">
-            <h1>Autoryzacja <span class="gold">Kancelarii</span></h1>
-            <p class="subtitle">Aplikacja <strong>Sejm RP Verification</strong> prosi o dostęp do Twojego profilu.</p>
-            
-            <div class="user-box">
-                <div class="discord-tag">Zalogowany jako Discord ID: <span id="discord-id">Ładowanie...</span></div>
-            </div>
-
-            <div class="steps-box">
-                <div class="step">1. Pobierz unikalny kod weryfikacyjny.</div>
-                <div class="step">2. Umieść go w swoim opisie (Bio) na Roblox.</div>
-                <div class="step">3. Potwierdź powiązanie kont.</div>
-            </div>
-
-            <button id="verifyBtn">POBIERZ KOD I WERYFIKUJ</button>
-        </div>
+        <p style="color: #ccc; font-size: 14px;">Kliknij poniżej, aby bezpiecznie zweryfikować swoje konto.</p>
         
-        <div class="auth-footer">
-            Po kliknięciu przycisku zgadzasz się na powiązanie konta Discord z kontem Roblox w bazie Kancelarii Sejmu.
+        <button id="loginBtn" class="continue-btn">Continue</button>
+        
+        <div class="footer">
+            ©2026 Roblox Corporation. Roblox, the Roblox logo...
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            // Przekierowanie do oficjalnego logowania Roblox
+            // Musisz wygenerować ten link w API lub wpisać go na sztywno z Twoim ClientID
+            window.location.href = `/api/roblox-auth?token=${token}`;
+        });
+    </script>
 </body>
 </html>

@@ -3,224 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabinet Marszałka Sejmu - X Kadencja</title>
+    <title>Gabinet Marszałka Sejmu - II Kadencja</title>
+    
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Sejm_RP_logo_and_wordmark.svg/3840px-Sejm_RP_logo_and_wordmark.svg.png">
+
     <style>
         /* GŁÓWNE USTAWIENIA */
+        * { box-sizing: border-box; }
         body {
             background-color: #f2f2f2;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px 0;
+            padding: 0;
             color: #333;
             line-height: 1.6;
         }
 
+        /* PASEK OSTRZEGAWCZY */
+        .rp-warning-bar {
+            background-color: #222;
+            color: #ffcc00;
+            text-align: center;
+            padding: 8px 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #c00;
+            font-weight: bold;
+        }
+        .rp-warning-bar span { color: #fff; font-weight: normal; text-transform: none; margin-left: 10px; }
+
         .page-container {
-            width: 1000px;
-            margin: 0 auto;
+            max-width: 1000px;
+            margin: 20px auto;
             background-color: white;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             overflow: hidden;
         }
 
-        /* NAGŁÓWEK (Spójny z oryginałem) */
+        /* NAGŁÓWEK */
         .header {
             display: flex;
-            padding: 20px;
+            padding: 25px;
             align-items: center;
-            border-bottom: 3px solid #c00;
+            background: #fff;
+            border-bottom: 4px solid #c00;
         }
 
-        .logo-box { width: 80px; margin-right: 20px; }
+        .logo-box { width: 90px; margin-right: 25px; flex-shrink: 0; }
         .logo-box img { width: 100%; height: auto; }
 
         .header-text { flex-grow: 1; }
-        .kadencja { font-weight: bold; color: #666; font-size: 14px; }
-        .motto { font-style: italic; font-size: 11px; color: #888; margin-top: 4px; }
+        .kadencja { font-weight: 800; color: #444; font-size: 16px; text-transform: uppercase; }
+        .motto { font-style: italic; font-size: 12px; color: #777; margin-top: 5px; }
 
-        /* PASEK POWROTU */
+        /* PASEK NAWIGACJI / POWRÓT */
         .top-bar {
-            background: #f9f9f9;
-            padding: 10px 25px;
+            background: #fdfdfd;
+            padding: 12px 25px;
             border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: flex-start;
         }
 
         .btn-back {
             text-decoration: none;
             color: #004a80;
             font-size: 13px;
-            font-weight: bold;
-            display: flex;
+            font-weight: 600;
+            display: inline-flex;
             align-items: center;
-            transition: color 0.2s;
+            transition: transform 0.2s, color 0.2s;
         }
 
-        .btn-back:hover { color: #c00; }
-        .btn-back::before { content: "←"; margin-right: 8px; font-size: 16px; }
+        .btn-back:hover { color: #c00; transform: translateX(-3px); }
+        .btn-back::before { content: "←"; margin-right: 8px; font-size: 18px; }
 
         /* TREŚĆ GŁÓWNA */
         .content {
-            padding: 40px 60px;
+            padding: 50px 60px;
         }
 
-        .path { font-size: 11px; color: #999; margin-bottom: 25px; text-transform: uppercase; }
+        .path { font-size: 10px; color: #aaa; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
 
         .profile-header {
             display: flex;
-            gap: 40px;
+            gap: 50px;
             margin-bottom: 40px;
-            align-items: flex-start;
+            flex-wrap: wrap;
         }
 
         .photo-frame {
             flex-shrink: 0;
-            border: 1px solid #ddd;
-            padding: 5px;
+            border: 1px solid #eee;
+            padding: 8px;
             background: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 2px;
         }
 
         .photo-frame img {
-            width: 200px;
+            width: 180px;
+            height: auto;
             display: block;
+            filter: saturate(1.1);
         }
 
+        .info-box { flex: 1; min-width: 300px; }
+        
         .info-box h1 {
             margin: 0;
-            color: #000;
-            font-size: 28px;
-            font-weight: normal;
+            color: #111;
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
         }
 
         .title-badge {
             display: inline-block;
             background-color: #c00;
             color: white;
-            padding: 4px 12px;
-            font-size: 12px;
-            font-weight: bold;
+            padding: 5px 14px;
+            font-size: 11px;
+            font-weight: 700;
             text-transform: uppercase;
-            margin-top: 10px;
-            margin-bottom: 20px;
+            margin: 12px 0 25px 0;
+            border-radius: 2px;
         }
 
         .description {
-            font-size: 14px;
-            color: #444;
-            max-width: 600px;
+            font-size: 15px;
+            color: #555;
+            text-align: justify;
         }
 
         /* SEKACJA KONTAKTOWA */
         .contact-section {
-            background-color: #f4f7f9;
-            border-radius: 8px;
-            padding: 25px;
-            margin-top: 20px;
-            border-left: 5px solid #004a80;
+            background-color: #f8fafc;
+            border-radius: 6px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 1px solid #e2e8f0;
+            border-left: 6px solid #004a80;
         }
 
         .contact-section h3 {
             margin-top: 0;
-            font-size: 16px;
+            font-size: 14px;
             color: #004a80;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
+
+        .contact-info-text { margin: 15px 0; font-size: 14px; color: #666; }
 
         .email-link {
             color: #c00;
             text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 19px;
+            font-weight: 700;
+            transition: 0.2s;
         }
 
-        .email-link:hover {
-            text-decoration: underline;
-        }
+        .email-link:hover { color: #000; text-decoration: underline; }
 
         /* STOPKA */
         .footer {
-            background: #333;
-            color: #ccc;
-            padding: 15px 25px;
+            background: #1a1a1a;
+            color: #888;
+            padding: 20px;
             text-align: center;
             font-size: 11px;
+            border-top: 1px solid #000;
+        }
+
+        @media (max-width: 768px) {
+            .page-container { margin: 0; border: none; }
+            .content { padding: 30px 20px; }
+            .profile-header { justify-content: center; text-align: center; }
         }
     </style>
 </head>
-<style>
-    .rp-warning-bar {
-        background-color: #333; /* Ciemne tło, żeby odróżniało się od białego Sejmu */
-        color: #ffcc00; /* Żółty tekst ostrzegawczy */
-        text-align: center;
-        padding: 8px 10px;
-        font-size: 11px;
-        font-family: Arial, sans-serif;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-bottom: 2px solid #c00;
-        font-weight: bold;
-    }
-    .rp-warning-bar span {
-        color: #fff;
-        font-weight: normal;
-        text-transform: none;
-        margin-left: 10px;
-    }
-</style>
-
-<div class="rp-warning-bar">
-    UWAGA: STRONA PROJEKTOWA 
-    <span>Ta witryna została stworzona wyłącznie na potrzeby roleplay i nie jest oficjalnym serwisem Kancelarii Sejmu RP.</span>
-</div>
 <body>
 
-<div class="page-container">
-    <header class="header">
-        <div class="logo-box">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Sejm_RP_logo_and_wordmark.svg/3840px-Sejm_RP_logo_and_wordmark.svg.png" alt="Sejm RP">
-        </div>
-        <div class="header-text">
-            <div class="kadencja">X kadencja Sejmu Rzeczypospolitej Polskiej</div>
-            <div class="motto">„Wszelka władza społeczności ludzkiej początek swój bierze z woli narodu”</div>
-        </div>
-    </header>
-
-    <div class="top-bar">
-        <a href="index.html" class="btn-back">Wróć do listy komórek organizacyjnych</a>
+    <div class="rp-warning-bar">
+        UWAGA: STRONA PROJEKTOWA 
+        <span>Ta witryna została stworzona wyłącznie na potrzeby roleplay.</span>
     </div>
 
-    <main class="content">
-        <div class="path">Kancelaria Sejmu / Struktura / Gabinet Marszałka</div>
-
-        <div class="profile-header">
-            <div class="photo-frame">
-                <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-DD59061E6F0B141DFC2DC2554BD615D3-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="Marszałek Sejmu">
+    <div class="page-container">
+        <header class="header">
+            <div class="logo-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Sejm_RP_logo_and_wordmark.svg/3840px-Sejm_RP_logo_and_wordmark.svg.png" alt="Sejm RP">
             </div>
-            
-            <div class="info-box">
-                <h1>Abraham Rothschild</h1>
-                <div class="title-badge">Marszałek Sejmu RP</div>
-                
-                <div class="description">
-                    <p>Gabinet Marszałka Sejmu zapewnia merytoryczne i organizacyjne wsparcie dla Marszałka Sejmu. Odpowiada za koordynację prac związanych z reprezentowaniem Sejmu na zewnątrz, przygotowanie wizyt oficjalnych oraz obsługę bieżących spraw legislacyjnych wynikających z kompetencji Marszałka.</p>
-                </div>
-
-                <div class="contact-section">
-                    <h3>Biuro Marszałka Sejmu</h3>
-                    <p>Wszelką korespondencję elektroniczną prosimy kierować na poniższy adres:</p>
-                    <a href="mailto:biuromarszałkasejmu@sejm.gov-prp.pl" class="email-link">biuromarszałkasejmu@sejm.gov-prp.pl</a>
-                </div>
+            <div class="header-text">
+                <div class="kadencja">II kadencja Sejmu Rzeczypospolitej Polskiej</div>
+                <div class="motto">„Wszelka władza społeczności ludzkiej początek swój bierze z woli narodu”</div>
             </div>
+        </header>
+
+        <div class="top-bar">
+            <a href="zarzadks.html" class="btn-back">Wróć do struktury Kancelarii Sejmu</a>
         </div>
-    </main>
 
-    <footer class="footer">
-        © 2026 Kancelaria Sejmu Rzeczypospolitej Polskiej. Wszystkie prawa zastrzeżone.
-    </footer>
-</div>
+        <main class="content">
+            <div class="path">Kancelaria Sejmu / Komórki Organizacyjne / Gabinet Marszałka</div>
+
+            <div class="profile-header">
+                <div class="photo-frame">
+                    <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-DD59061E6F0B141DFC2DC2554BD615D3-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="Abraham Rothschild">
+                </div>
+                
+                <div class="info-box">
+                    <h1>Abraham Rothschild</h1>
+                    <div class="title-badge">Marszałek Sejmu RP</div>
+                    
+                    <div class="description">
+                        <p>Gabinet Marszałka Sejmu jest kluczową komórką merytoryczną, zapewniającą pełną obsługę najwyższego organu ustawodawczego. Do zadań Gabinetu należy koordynacja kalendarza Marszałka, przygotowywanie analiz legislacyjnych oraz prowadzenie protokołu dyplomatycznego podczas wizyt zagranicznych delegacji parlamentarnych.</p>
+                        <p>Zespół Gabinetu czuwa nad sprawnym przebiegiem prac Prezydium Sejmu oraz Konwentu Seniorów, dbając o najwyższe standardy parlamentaryzmu.</p>
+                    </div>
+
+                    <div class="contact-section">
+                        <h3>Kontakt z Gabinetem</h3>
+                        <p class="contact-info-text">Wnioski, prośby o patronat oraz korespondencję oficjalną prosimy kierować drogą elektroniczną:</p>
+                        <a href="mailto:biuromarszałkasejmu@sejm.gov-prp.pl" class="email-link">biuromarszałkasejmu@sejm.gov-prp.pl</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            © 2026 Kancelaria Sejmu Rzeczypospolitej Polskiej | Dokumentacja Systemowa Roleplay
+        </footer>
+    </div>
 
 </body>
 </html>

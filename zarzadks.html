@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zarząd Kancelarii Sejmu</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px 0;
+            color: #222;
+        }
+
+        .page-container {
+            width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* NAGŁÓWEK */
+        .header {
+            display: flex;
+            padding: 20px;
+            background: #fff;
+            border-bottom: 4px solid #004a80;
+            align-items: center;
+        }
+
+        .logo-box img { width: 70px; margin-right: 20px; }
+        .header-title h1 { margin: 0; font-size: 24px; color: #004a80; text-transform: uppercase; }
+        .header-title p { margin: 5px 0 0; font-size: 12px; color: #666; font-weight: bold; }
+
+        /* NAWIGACJA */
+        .nav-bar {
+            background: #f9f9f9;
+            padding: 10px 25px;
+            border-bottom: 1px solid #ddd;
+        }
+        .btn-back { text-decoration: none; color: #004a80; font-size: 13px; font-weight: bold; }
+        .btn-back:hover { color: #c00; }
+
+        /* TREŚĆ */
+        .main-content { padding: 40px; }
+        
+        .section-title {
+            color: #c00;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 22px;
+            text-transform: uppercase;
+        }
+
+        /* SIATKA KIEROWNICTWA */
+        .management-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .person-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .person-card img {
+            width: 70px;
+            height: 90px;
+            background: #eee;
+            object-fit: cover;
+            border: 1px solid #ccc;
+        }
+
+        .person-info span { 
+            display: block; 
+            font-size: 11px; 
+            color: #c00; 
+            font-weight: bold; 
+            text-transform: uppercase;
+        }
+
+        .person-info b { 
+            font-size: 15px; 
+            color: #004a80; 
+        }
+
+        /* RZECZNIK - POJEDYNCZY PANEL */
+        .spokesman-box {
+            background: #eef4f8;
+            border: 2px solid #004a80;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        /* KONTAKT */
+        .contact-footer {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f1f1f1;
+            border-left: 5px solid #004a80;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<style>
+    .rp-warning-bar {
+        background-color: #333; /* Ciemne tło, żeby odróżniało się od białego Sejmu */
+        color: #ffcc00; /* Żółty tekst ostrzegawczy */
+        text-align: center;
+        padding: 8px 10px;
+        font-size: 11px;
+        font-family: Arial, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #c00;
+        font-weight: bold;
+    }
+    .rp-warning-bar span {
+        color: #fff;
+        font-weight: normal;
+        text-transform: none;
+        margin-left: 10px;
+    }
+</style>
+
+<div class="rp-warning-bar">
+    UWAGA: STRONA PROJEKTOWA 
+    <span>Ta witryna została stworzona wyłącznie na potrzeby roleplay i nie jest oficjalnym serwisem Kancelarii Sejmu RP.</span>
+</div>
+<body>
+
+<div class="page-container">
+    <header class="header">
+        <div class="logo-box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Sejm_RP_logo_and_wordmark.svg/3840px-Sejm_RP_logo_and_wordmark.svg.png" alt="Sejm">
+        </div>
+        <div class="header-title">
+            <h1>Zarząd Kancelarii Sejmu</h1>
+            <p>ORGANIZACJA I ADMINISTRACJA PARLAMENTU</p>
+        </div>
+    </header>
+
+    <div class="nav-bar">
+        <a href="index.html" class="btn-back">← POWRÓT DO STRONY GŁÓWNEJ</a>
+    </div>
+
+    <main class="main-content">
+        
+        <h2 class="section-title">Kierownictwo Kancelarii</h2>
+        <div class="management-grid">
+            <div class="person-card">
+                <img src="https://tr.rbxcdn.com/30DAY-Avatar-08CB56A82BEF533F2DEC8FDF7C7EB5A9-Png/720/720/Avatar/Webp/noFilter" alt="Szef">
+                <div class="person-info">
+                    <span>Szef Kancelarii Sejmu</span>
+                    <b>Paweł Antoni Peza</b>
+                </div>
+            </div>
+            <div class="person-card">
+                <img src="https://www.sejm.gov.pl/Sejm9.nsf/img/brak_foto.png" alt="Zastępca Szefa">
+                <div class="person-info">
+                    <span>Zastępca Szefa Kancelarii</span>
+                    <b>Jakub Jan Adamowicz</b>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Zarząd</h2>
+        <div class="management-grid">
+            <div class="person-card">
+                <img src="https://www.sejm.gov.pl/Sejm9.nsf/img/brak_foto.png" alt="Przewodniczący">
+                <div class="person-info">
+                    <span>Przewodniczący Zarządu</span>
+                    <b>Janusz Klapek</b>
+                </div>
+            </div>
+            <div class="person-card">
+                <img src="https://www.sejm.gov.pl/Sejm9.nsf/img/brak_foto.png" alt="Zastępca Przewodniczącego">
+                <div class="person-info">
+                    <span>Zastępca Przewodniczącego</span>
+                    <b>Ignacy Malkiewicz</b>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">RZECZNIK</h2>
+        <div class="spokesman-box">
+            <img src="https://www.sejm.gov.pl/Sejm9.nsf/img/brak_foto.png" style="width:100px; height:130px; border:1px solid #004a80;" alt="Rzecznik">
+            <div class="person-info">
+                <span style="font-size: 14px;">Rzecznik Kancelarii Sejmu</span>
+                <b style="font-size: 20px;">Paweł Monka</b>
+                <p style="margin-top: 10px; font-size: 13px; line-height: 1.5;">Odpowiada za politykę informacyjną Kancelarii Sejmu oraz kontakt z mediami krajowymi i zagranicznymi.</p>
+            </div>
+        </div>
+
+        <div class="contact-footer">
+            <strong>KONTAKT ZARZĄD</strong><br>
+            E-mail: pawelantoni.peza@sejm.gov-prp.pl<br>
+        </div>
+    </main>
+
+    <footer style="background: #eee; padding: 15px; text-align: center; font-size: 11px; color: #777;">
+        © 2026 Kancelaria Sejmu | System Informacyjny Sejmu
+    </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brak informacji - Sejm RP</title>
+    <style>
+        /* PASEK RP */
+        .rp-warning-bar {
+            background-color: #333;
+            color: #ffcc00;
+            text-align: center;
+            padding: 8px 10px;
+            font-size: 11px;
+            font-family: Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #c00;
+            font-weight: bold;
+        }
+        .rp-warning-bar span { color: #fff; font-weight: normal; text-transform: none; margin-left: 10px; }
+
+        /* BAZA */
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .error-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 50px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .logo-sejm {
+            width: 120px;
+            margin-bottom: 30px;
+            filter: grayscale(1); /* Stylistyka "systemowa" */
+            opacity: 0.7;
+        }
+
+        h1 {
+            color: #004a80;
+            font-size: 24px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background-color: #f9f9f9;
+            border-left: 5px solid #c00;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .btn-return {
+            display: inline-block;
+            background-color: #004a80;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .btn-return:hover {
+            background-color: #c00;
+        }
+
+        .footer-id {
+            margin-top: 20px;
+            font-size: 10px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="rp-warning-bar">
+        UWAGA: STRONA PROJEKTOWA 
+        <span>Ta witryna została stworzona wyłącznie na potrzeby roleplay i nie jest oficjalnym serwisem Kancelarii Sejmu RP.</span>
+    </div>
+
+    <div class="error-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Sejm_RP_logo_and_wordmark.svg/3840px-Sejm_RP_logo_and_wordmark.svg.png" class="logo-sejm" alt="Sejm RP">
+        
+        <h1>Informacja niedostępna</h1>
+        
+        <p>Przepraszamy, ale poszukiwana strona nie została jeszcze opublikowana w Systemie Informacyjnym Sejmu lub trwają nad nią prace redakcyjne.</p>
+
+        <div class="info-box">
+            <strong>Możliwe przyczyny:</strong>
+            <ul>
+                <li>Projekt ustawy/dokument nie został jeszcze złożony w laski marszałkowskiej.</li>
+                <li>Trwa aktualizacja bazy danych po ostatnim posiedzeniu.</li>
+                <li>Link wygasł lub treść została przeniesiona do archiwum.</li>
+            </ul>
+        </div>
+
+        <a href="javascript:history.back()" class="btn-return">← WRÓĆ DO POPRZEDNIEJ STRONY</a>
+
+        <div class="footer-id">
+            Kod błędu: SIS_404_NULL | Serwer: RP-SEJM-02
+        </div>
+    </div>
+
+</body>
+</html>

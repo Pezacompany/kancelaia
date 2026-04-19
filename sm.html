@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Straż Marszałkowska - Struktura i Kontakt</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px 0;
+            color: #222;
+        }
+
+        .page-container {
+            width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* NAGŁÓWEK */
+        .header {
+            display: flex;
+            padding: 20px;
+            background: #fff;
+            border-bottom: 4px solid #003366; /* Granat mundurowy */
+            align-items: center;
+        }
+
+        .logo-box img { width: 70px; margin-right: 20px; }
+        .header-title h1 { margin: 0; font-size: 24px; color: #003366; text-transform: uppercase; }
+        .header-title p { margin: 5px 0 0; font-size: 12px; color: #666; font-weight: bold; }
+
+        /* POWRÓT */
+        .nav-bar {
+            background: #f9f9f9;
+            padding: 10px 25px;
+            border-bottom: 1px solid #ddd;
+        }
+        .btn-back { text-decoration: none; color: #003366; font-size: 13px; font-weight: bold; }
+        .btn-back:hover { color: #c00; }
+
+        /* TREŚĆ */
+        .main-content { padding: 40px; }
+        
+        .section-title {
+            color: #c00;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+
+        /* OPIS I FOTO */
+        .sm-description {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .sm-photo-main {
+            flex-shrink: 0;
+            width: 350px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            background: #fdfdfd;
+        }
+        .sm-photo-main img { width: 100%; height: auto; display: block; }
+        
+        .text-block { font-size: 14px; line-height: 1.8; text-align: justify; }
+
+        /* ZARZĄD SM */
+        .management-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .commander-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .commander-card img {
+            width: 80px;
+            height: 100px;
+            background: #ddd;
+            object-fit: cover;
+            border: 1px solid #bbb;
+        }
+        .commander-info b { font-size: 16px; display: block; color: #003366; }
+        .commander-info span { font-size: 13px; color: #c00; font-weight: bold; }
+
+        /* KONTAKT */
+        .contact-box {
+            background: #003366;
+            color: white;
+            padding: 30px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .contact-box h2 { margin-top: 0; font-size: 20px; }
+        .contact-email {
+            font-size: 22px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 2px solid #c00;
+        }
+
+        .footer {
+            background: #eee;
+            padding: 15px;
+            text-align: center;
+            font-size: 11px;
+            color: #777;
+        }
+    </style>
+</head>
+<style>
+    .rp-warning-bar {
+        background-color: #333; /* Ciemne tło, żeby odróżniało się od białego Sejmu */
+        color: #ffcc00; /* Żółty tekst ostrzegawczy */
+        text-align: center;
+        padding: 8px 10px;
+        font-size: 11px;
+        font-family: Arial, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #c00;
+        font-weight: bold;
+    }
+    .rp-warning-bar span {
+        color: #fff;
+        font-weight: normal;
+        text-transform: none;
+        margin-left: 10px;
+    }
+</style>
+
+<div class="rp-warning-bar">
+    UWAGA: STRONA PROJEKTOWA 
+    <span>Ta witryna została stworzona wyłącznie na potrzeby roleplay i nie jest oficjalnym serwisem Kancelarii Sejmu RP.</span>
+</div>
+<body>
+
+<div class="page-container">
+    <header class="header">
+        <div class="logo-box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Sejm_RP_logo_and_wordmark.svg/3840px-Sejm_RP_logo_and_wordmark.svg.png" alt="Sejm">
+        </div>
+        <div class="header-title">
+            <h1>Straż Marszałkowska</h1>
+            <p>FORMACJA PODLEGŁA MARSZAŁKOWI SEJMU</p>
+        </div>
+    </header>
+
+    <div class="nav-bar">
+        <a href="index.html" class="btn-back">← POWRÓT DO KANCELARII SEJMU</a>
+    </div>
+
+    <main class="main-content">
+        <h2 class="section-title">O formacji</h2>
+        <div class="sm-description">
+            <div class="sm-photo-main">
+                <img src="https://cdn.discordapp.com/attachments/1370887217991516306/1493275217437659226/image.png?ex=69e4f7eb&is=69e3a66b&hm=0042040d6db0a019f7f862fbec39c45e27b7ea336ac7681d384209b23209955d" alt="Funkcjonariusze SM">
+                <p style="font-size: 10px; color: #999; margin-top: 5px; text-align: center;">#BEZPIECZEŃSTWO, HONOR, DUMA, OJCZYZNA</p>
+            </div>
+            <div class="text-block">
+                <p>Straż Marszałkowska to elitarna, umundurowana formacja, której tradycje sięgają czasów I Rzeczypospolitej. Do jej głównych zadań należy ochrona terenów i obiektów Sejmu i Senatu, zapewnienie bezpieczeństwa osobom tam przebywającym oraz wykonywanie czynności reprezentacyjnych.</p>
+                <p>Funkcjonariusze Straży przechodzą specjalistyczne szkolenia z zakresu ochrony osób, pirotechniki oraz działań taktycznych. Formacja ta jest symbolem ciągłości i powagi polskiego parlamentaryzmu.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Zarząd Straży Marszałkowskiej</h2>
+        <div class="management-grid">
+            <div class="commander-card">
+                <img src="https://media.discordapp.net/attachments/1370887217991516306/1492860822500806776/image.png?ex=69e4c77c&is=69e375fc&hm=f2a0bee626f167cc5e50674efc32ccee189881a4ad3a360ed731a693ec122a5b&=&format=webp&quality=lossless" alt="Komendant">
+                <div class="commander-info">
+                    <span>KOMENDANT SM</span>
+                    <b>Nad insp. Arkadiusz Czerepach</b>
+                    <p style="font-size: 12px; margin: 5px 0;">Kieruje całokształtem działań Straży.</p>
+                </div>
+            </div>
+            <div class="commander-card">
+                <img src="https://media.discordapp.net/attachments/1370887217991516306/1492860822727430284/image.png?ex=69e4c77c&is=69e375fc&hm=a2c33c468eba2967fe69a2b711032bcdcccf6e90e4faccc0657a34a0c6226c79&=&format=webp&quality=lossless" alt="Zastępca">
+                <div class="commander-info">
+                    <span>ZASTĘPCA KOMENDANTA SM</span>
+                    <b>Insp. Dawid Melończyk</b>
+                    <p style="font-size: 12px; margin: 5px 0;">Nadzoruje pion logistyki i szkoleń.</p>
+                </div>
+            </div>
+
+            <div class="commander-card">
+                <img src="https://media.discordapp.net/attachments/1370887217991516306/1492860822970433616/image.png?ex=69e5703c&is=69e41ebc&hm=9f8a868e2ce21d4de1e85d8fc80950500f286ddb98c99dfbbc56acce41078a6d&=&format=webp&quality=lossless" alt="Rzecznik">
+                <div class="commander-info">
+                    <span>RZECZNIK DYSCYPLINARNY SM</span>
+                    <b>Nadkom. Mariusz Kulka</b>
+                    <p style="font-size: 12px; margin: 5px 0;">Dyscyplinane.</p>
+                </div>
+            </div>
+            <div class="commander-card">
+                <img src="https://media.discordapp.net/attachments/1370887217991516306/1492860823251583180/image.png?ex=69e5703c&is=69e41ebc&hm=df13bb800a83efdda6842bfa76c32ff911f1da10ef042b1b5a5727e4109f2a64&=&format=webp&quality=lossless&width=540&height=856" alt="RzecznikPrasowy">
+                <div class="commander-info">
+                    <span>RZECZNIK PRASOWY SM</span>
+                    <b>Podkom. Kamil Memcen</b>
+                    <p style="font-size: 12px; margin: 5px 0;">Prasa i Media.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <h2>Kontakt z Biurem Straży</h2>
+            <p>W sprawach dotyczących rekrutacji, przepustek oraz zapytań oficjalnych:</p>
+            <a href="mailto:biurods.sm@sejm.gov-prp.pl" class="contact-email">biurods.sm@sejm.gov-prp.pl</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        © 2026 Kancelaria Sejmu - Straż Marszałkowska | System Informacyjny Sejmu
+    </footer>
+</div>
+
+</body>
+</html>

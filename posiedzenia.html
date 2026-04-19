@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmonogram Posiedzeń - Sejm RP</title>
+    <style>
+        /* PASEK RP */
+        .rp-warning-bar {
+            background-color: #333; color: #ffcc00; text-align: center; padding: 8px;
+            font-size: 11px; font-family: Arial; text-transform: uppercase;
+            border-bottom: 2px solid #c00; font-weight: bold;
+        }
+        .rp-warning-bar span { color: #fff; font-weight: normal; text-transform: none; margin-left: 10px; }
+
+        body { background-color: #f0f2f5; font-family: 'Segoe UI', sans-serif; margin: 0; color: #333; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        
+        .header-section {
+            background: white; padding: 25px; border-radius: 8px;
+            border-bottom: 4px solid #004a80; margin-bottom: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .meetings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+
+        /* KAFELEK */
+        .meeting-card {
+            background: white; border: 1px solid #ddd; border-radius: 8px;
+            overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
+        }
+
+        .card-header {
+            background: #004a80; color: white; padding: 15px; font-weight: bold;
+            text-align: center; display: flex; flex-direction: column; align-items: center;
+        }
+
+        .card-body { padding: 20px; flex-grow: 1; }
+        .info-row { display: flex; justify-content: space-between; border-bottom: 1px dotted #eee; padding: 5px 0; font-size: 14px; }
+        .info-label { font-weight: bold; color: #666; }
+
+        .card-links { padding: 15px; background: #f9f9f9; display: flex; flex-direction: column; gap: 10px; }
+        
+        /* PRZYCISKI */
+        .btn-link {
+            display: block; text-align: center; padding: 10px; border-radius: 4px;
+            text-decoration: none; font-size: 12px; font-weight: bold;
+        }
+        .btn-plan { background: #fff; color: #004a80; border: 1px solid #004a80; }
+        .btn-discord { background: #5865F2; color: white; }
+
+        /* STATUSY */
+        .status-badge { font-size: 10px; padding: 2px 10px; border-radius: 10px; margin-top: 8px; text-transform: uppercase; }
+        .status-upcoming { background: #fff3e0; color: #ef6c00; border: 1px solid #ef6c00; }
+        .status-live { background: #ffebee; color: #c62828; border: 1px solid #c62828; animation: pulse 2s infinite; }
+        .status-finished { background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }
+
+        @keyframes pulse { 0% {opacity: 1;} 50% {opacity: 0.5;} 100% {opacity: 1;} }
+    </style>
+</head>
+<body>
+
+    <div class="rp-warning-bar">
+        UWAGA: STRONA PROJEKTOWA <span>Ta witryna stworzona pod RP - nie jest oficjalna.</span>
+    </div>
+
+    <div class="container">
+        <div class="header-section">
+            <h1 style="margin:0; color:#004a80; text-transform: uppercase; font-size: 24px;">Harmonogram Posiedzeń</h1>
+        </div>
+
+        <div id="meetings-container" class="meetings-grid"></div>
+    </div>
+
+    <script>
+        // ==========================================
+        // KONFIGURACJA POSIEDZEŃ - TUTAJ DODAJESZ
+        // ==========================================
+        const posiedzenia = [
+
+            {
+                tytul: "Zgromadzenie narodowe II Kadencji",
+                data: "2026-04-19",
+                godzina: "18:00",
+                planUrl: "https://docs.google.com/document/d/1okEabXKsaKrGgUIVfpV-hkv9bWzTGMjYBe47TMkkHF8/edit?tab=t.0",
+                discordUrl: "https://discord.gg/3Ctu8S5xsR?event=1495378464197447844"
+            },
+            {
+                tytul: "1. Posiedzenie Sejmu II Kadencji Dzień 2",
+                data: "2026-04-18",
+                godzina: "18:00",
+                planUrl: "https://docs.google.com/document/d/1vD4bVCcnqz0ZbgqeF2M3lOQOBWIGqQwsfSxlRhDzj5E/edit?tab=t.0",
+                discordUrl: "https://discord.gg/a3v7zaG8cR"
+            },
+            {
+                tytul: "1. Posiedzenie Sejmu II Kadencji",
+                data: "2026-04-17", // Format: RRRR-MM-DD
+                godzina: "18:00",    // Format: GG:MM
+                planUrl: "https://docs.google.com/document/d/1I8hnf08wF_sPX2X9j1Q7jqoGOoJH8bEY9G-bJe7hKrw/edit?tab=t.0",
+                discordUrl: "https://discord.gg/a3v7zaG8cR"
+            }
+        ];
+
+        function renderMeetings() {
+            const container = document.getElementById('meetings-container');
+            const now = new Date();
+            container.innerHTML = '';
+
+            posiedzenia.forEach(p => {
+                const start = new Date(`${p.data}T${p.godzina}:00`);
+                const end = new Date(start.getTime() + (2 * 60 * 60 * 1000)); // Trwa 2h
+                
+                let statusTxt = "";
+                let statusClass = "";
+                let showLinks = true;
+
+                if (now < start) {
+                    const diff = start - now;
+                    const h = Math.floor(diff / (1000 * 60 * 60));
+                    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    statusTxt = `Odbędzie się za: ${h}h ${m}m`;
+                    statusClass = "status-upcoming";
+                } else if (now >= start && now <= end) {
+                    statusTxt = "● TRWA POSIEDZENIE";
+                    statusClass = "status-live";
+                } else {
+                    statusTxt = "ZAKOŃCZONE";
+                    statusClass = "status-finished";
+                    showLinks = false; // UKRYWA PRZYCISKI PO ZAKOŃCZENIU
+                }
+
+                const card = `
+                    <div class="meeting-card">
+                        <div class="card-header">
+                            ${p.tytul}
+                            <span class="status-badge ${statusClass}">${statusTxt}</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-row"><span class="info-label">Data:</span><span>${p.data}</span></div>
+                            <div class="info-row"><span class="info-label">Godzina:</span><span>${p.godzina}</span></div>
+                        </div>
+                        ${showLinks ? `
+                        <div class="card-links">
+                            <a href="${p.planUrl}" class="btn-link btn-plan">PLAN POSIEDZENIA</a>
+                            <a href="${p.discordUrl}" class="btn-link btn-discord">WYDARZENIE DISCORD</a>
+                        </div>` : ''}
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        renderMeetings();
+        setInterval(renderMeetings, 60000); // Odświeżaj co minutę
+    </script>
+</body>
+</html>

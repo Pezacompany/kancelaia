@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marszałek Sejmu - Biografia</title>
+    <style>
+        /* BAZA I FONTY */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* BANNER GŁÓWNY (HERO) */
+        .hero-banner {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.4)), 
+                        url('https://bi.im-g.pl/im/77/80/1a/z27790711V,Budynek-Sejmu.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 10%;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .hero-banner h1 {
+            margin: 0;
+            font-size: 26px;
+            color: #003366;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-banner p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #444;
+            font-weight: bold;
+        }
+
+        /* MENU POD BANNEREM */
+        .sub-nav {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .sub-nav a {
+            text-decoration: none;
+            color: #004a80;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sub-nav a.active {
+            background-color: #e9ecef;
+            padding: 5px 15px;
+            border-radius: 4px;
+            color: #333;
+        }
+
+        .sub-nav a:hover:not(.active) { color: #c00; }
+
+        /* KONTENER BIOGRAFII */
+        .bio-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            background: white;
+            padding: 50px;
+            display: flex;
+            gap: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .bio-sidebar {
+            flex: 0 0 300px;
+            text-align: center;
+        }
+
+        .bio-photo {
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background: #fff;
+        }
+
+        .bio-main {
+            flex: 1;
+        }
+
+        .bio-main h2 {
+            color: #004a80;
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .bio-birthdate {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .bio-text p {
+            font-size: 14px;
+            text-align: justify;
+            margin-bottom: 15px;
+            color: #222;
+        }
+
+        /* STOPKA */
+        .footer {
+            background-color: #f9f9f9;
+            border-top: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 40px;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #c00;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<style>
+    .rp-warning-bar {
+        background-color: #333; /* Ciemne tło, żeby odróżniało się od białego Sejmu */
+        color: #ffcc00; /* Żółty tekst ostrzegawczy */
+        text-align: center;
+        padding: 8px 10px;
+        font-size: 11px;
+        font-family: Arial, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #c00;
+        font-weight: bold;
+    }
+    .rp-warning-bar span {
+        color: #fff;
+        font-weight: normal;
+        text-transform: none;
+        margin-left: 10px;
+    }
+</style>
+
+<div class="rp-warning-bar">
+    UWAGA: STRONA PROJEKTOWA 
+    <span>Ta witryna została stworzona wyłącznie na potrzeby roleplay i nie jest oficjalnym serwisem Kancelarii Sejmu RP.</span>
+</div>
+<body>
+
+    <section class="hero-banner">
+        <h1>Marszałek Sejmu</h1>
+        <p>RZECZYPOSPOLITEJ POLSKIEJ</p>
+    </section>
+
+    <nav class="sub-nav">
+        <a href="marszalek_main.html">Wydarzenia</a>
+        <a href="#">Biografia</a>
+    </nav>
+
+    <main class="bio-container">
+        <div class="bio-sidebar">
+            <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-DD59061E6F0B141DFC2DC2554BD615D3-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="Marszałek Sejmu" class="bio-photo">
+        </div>
+
+        <div class="bio-main">
+            <a href="marszalek2.html" class="btn-back">← POWRÓT</a>
+            <h2>Abraham Rothschild</h2>
+            <div class="bio-birthdate">Urodził się - ---- ---- r. w Warszawie.</div>
+
+            <div class="bio-text">
+                <p>Tu będzie ospis marszałka sejmu</p>
+               
+
+                <p>Pełnił funkcję Wicemarszałka Sejmu IX kadencji.</p>
+                <p>13 listopada 2023 r. wybrany na Wicemarszałka Sejmu X kadencji.</p>
+                <p><b>18 listopada 2025 r. wybrany na Marszałka Sejmu X kadencji.</b></p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <span>Kontakt</span> | <span>Dostępność</span> | <span>System Informacyjny Sejmu</span>
+        <p style="margin-top: 10px; font-size: 10px;">^ Do góry strony</p>
+    </footer>
+
+</body>
+</html>

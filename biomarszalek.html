@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marszałek Sejmu - Biografia</title>
+    
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Sejm_RP_logo_and_wordmark.svg/3840px-Sejm_RP_logo_and_wordmark.svg.png">
+
     <style>
         /* BAZA I FONTY */
         * { box-sizing: border-box; }
@@ -14,6 +17,20 @@
             color: #333;
             line-height: 1.6;
         }
+
+        /* PASEK RP */
+        .rp-warning-bar {
+            background-color: #333;
+            color: #ffcc00;
+            text-align: center;
+            padding: 8px 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #c00;
+            font-weight: bold;
+        }
+        .rp-warning-bar span { color: #fff; font-weight: normal; text-transform: none; margin-left: 10px; }
 
         /* BANNER GŁÓWNY (HERO) */
         .hero-banner {
@@ -26,13 +43,13 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-left: 10%;
+            padding: 0 5%;
             border-bottom: 1px solid #ccc;
         }
 
         .hero-banner h1 {
             margin: 0;
-            font-size: 26px;
+            font-size: clamp(20px, 5vw, 26px); /* Elastyczna czcionka */
             color: #003366;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -50,12 +67,13 @@
             background-color: white;
             display: flex;
             justify-content: center;
-            gap: 30px;
-            padding: 15px 0;
+            gap: 20px;
+            padding: 15px 10px;
             border-bottom: 1px solid #ddd;
             position: sticky;
             top: 0;
             z-index: 100;
+            flex-wrap: wrap; /* Zawijanie menu na małych ekranach */
         }
 
         .sub-nav a {
@@ -63,64 +81,67 @@
             color: #004a80;
             font-size: 14px;
             font-weight: 500;
+            white-space: nowrap;
         }
 
-        .sub-nav a.active {
-            background-color: #e9ecef;
-            padding: 5px 15px;
-            border-radius: 4px;
-            color: #333;
-        }
+        .sub-nav a:hover { color: #c00; }
 
-        .sub-nav a:hover:not(.active) { color: #c00; }
-
-        /* KONTENER BIOGRAFII */
+        /* KONTENER BIOGRAFII - RESPONSYWNY */
         .bio-container {
             max-width: 1100px;
-            margin: 40px auto;
+            width: 95%;
+            margin: 20px auto;
             background: white;
-            padding: 50px;
+            padding: 30px;
             display: flex;
+            flex-direction: row; /* Domyślnie obok siebie */
             gap: 40px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
         .bio-sidebar {
-            flex: 0 0 300px;
+            flex: 0 0 250px;
             text-align: center;
         }
 
         .bio-photo {
             width: 100%;
+            max-width: 250px;
             border: 1px solid #ddd;
             padding: 5px;
             background: #fff;
         }
 
-        .bio-main {
-            flex: 1;
-        }
+        .bio-main { flex: 1; }
 
         .bio-main h2 {
             color: #004a80;
             font-size: 28px;
-            margin-top: 0;
-            margin-bottom: 10px;
+            margin: 0 0 10px 0;
         }
 
         .bio-birthdate {
             font-size: 13px;
             color: #666;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
         }
 
         .bio-text p {
-            font-size: 14px;
+            font-size: 15px;
             text-align: justify;
             margin-bottom: 15px;
             color: #222;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: #c00;
+            font-size: 12px;
+            font-weight: bold;
         }
 
         /* STOPKA */
@@ -134,42 +155,40 @@
             margin-top: 40px;
         }
 
-        .btn-back {
-            display: inline-block;
-            margin-bottom: 20px;
-            text-decoration: none;
-            color: #c00;
-            font-size: 12px;
-            font-weight: bold;
+        /* MEDIA QUERIES - DOSTOSOWANIE DO TELEFONÓW */
+        @media (max-width: 768px) {
+            .bio-container {
+                flex-direction: column; /* Zdjęcie nad tekstem */
+                padding: 20px;
+            }
+            .bio-sidebar {
+                flex: none;
+                margin-bottom: 20px;
+            }
+            .bio-photo {
+                max-width: 200px; /* Nieco mniejsze zdjęcie na telefonie */
+            }
+            .hero-banner {
+                height: 180px;
+                text-align: center;
+                padding: 0 20px;
+            }
+            .bio-main h2 {
+                font-size: 22px;
+                text-align: center;
+            }
+            .bio-birthdate {
+                text-align: center;
+            }
         }
     </style>
 </head>
-<style>
-    .rp-warning-bar {
-        background-color: #333; /* Ciemne tło, żeby odróżniało się od białego Sejmu */
-        color: #ffcc00; /* Żółty tekst ostrzegawczy */
-        text-align: center;
-        padding: 8px 10px;
-        font-size: 11px;
-        font-family: Arial, sans-serif;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-bottom: 2px solid #c00;
-        font-weight: bold;
-    }
-    .rp-warning-bar span {
-        color: #fff;
-        font-weight: normal;
-        text-transform: none;
-        margin-left: 10px;
-    }
-</style>
-
-<div class="rp-warning-bar">
-    UWAGA: STRONA PROJEKTOWA 
-    <span>Ta witryna została stworzona wyłącznie na potrzeby roleplay i nie jest oficjalnym serwisem Kancelarii Sejmu RP.</span>
-</div>
 <body>
+
+    <div class="rp-warning-bar">
+        UWAGA: STRONA PROJEKTOWA 
+        <span>Ta witryna stworzona pod roleplay - nie jest oficjalnym serwisem Sejmu.</span>
+    </div>
 
     <section class="hero-banner">
         <h1>Marszałek Sejmu</h1>
@@ -178,33 +197,37 @@
 
     <nav class="sub-nav">
         <a href="marszalek_main.html">Wydarzenia</a>
-        <a href="#">Biografia</a>
+        <a href="wizyty.html">Wizyty międzynarodowe</a>
+        <a href="biografia.html" style="color: #c00; font-weight: bold;">Biografia</a>
+        <a href="wywiady.html">Wywiady</a>
+        <a href="patronaty.html">Patronaty</a>
     </nav>
 
     <main class="bio-container">
-        <div class="bio-sidebar">
+        <aside class="bio-sidebar">
             <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-DD59061E6F0B141DFC2DC2554BD615D3-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="Marszałek Sejmu" class="bio-photo">
-        </div>
+        </aside>
 
-        <div class="bio-main">
-            <a href="marszalek2.html" class="btn-back">← POWRÓT</a>
+        <article class="bio-main">
+            <a href="javascript:history.back()" class="btn-back">← POWRÓT</a>
             <h2>Abraham Rothschild</h2>
-            <div class="bio-birthdate">Urodził się - ---- ---- r. w Warszawie.</div>
+            <div class="bio-birthdate">Urodził się w Warszawie.</div>
 
             <div class="bio-text">
-                <p>Tu będzie ospis marszałka sejmu</p>
-               
-
-                <p>Pełnił funkcję Wicemarszałka Sejmu IX kadencji.</p>
-                <p>13 listopada 2023 r. wybrany na Wicemarszałka Sejmu X kadencji.</p>
-                <p><b>18 listopada 2025 r. wybrany na Marszałka Sejmu X kadencji.</b></p>
+                <p>Tu znajduje się oficjalny opis ścieżki zawodowej i politycznej Marszałka Sejmu. Abraham Rothschild jest kluczową postacią w obecnej konfiguracji parlamentarnej.</p>
+                
+                <p>Pełnił funkcję Wicemarszałka Sejmu IX kadencji, gdzie odpowiadał za kontakty z parlamentami zagranicznymi oraz nadzór nad pracami komisji etyki.</p>
+                
+                <p>13 listopada 2023 r. został wybrany na Wicemarszałka Sejmu X kadencji, kontynuując swoją misję modernizacji prac izby niższej.</p>
+                
+                <p><b>18 listopada 2025 r. Wysoka Izba powierzyła mu funkcję Marszałka Sejmu X kadencji.</b> Od tego czasu przewodniczy obradom Sejmu i reprezentuje go na zewnątrz.</p>
             </div>
-        </div>
+        </article>
     </main>
 
     <footer class="footer">
-        <span>Kontakt</span> | <span>Dostępność</span> | <span>System Informacyjny Sejmu</span>
-        <p style="margin-top: 10px; font-size: 10px;">^ Do góry strony</p>
+        <div>Kontakt | Dostępność | System Informacyjny Sejmu</div>
+        <p style="margin-top: 10px; font-size: 10px;">© 2026 Sejm RP Roleplay</p>
     </footer>
 
 </body>

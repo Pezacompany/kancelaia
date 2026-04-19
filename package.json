@@ -1,8 +1,0 @@
-{
-  "name": "kancelaria-weryfikacja",
-  "version": "1.0.0",
-  "dependencies": {
-    "mysql2": "^3.9.0",
-    "uuid": "^9.0.1"
-  }
-}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Formularz – Kancelaria Sejmu</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="document">
+
+    <div class="header">
+        <img src="godlo.png" class="godlo">
+        <h1>KANCELARIA SEJMU</h1>
+        <h2>FORMULARZ ZGŁOSZENIOWY</h2>
+    </div>
+
+    <form id="form">
+
+        <div class="section">
+            <h3>DANE OSOBOWE</h3>
+
+            <label>Imię</label>
+            <input type="text" name="imie" required>
+
+            <label>Drugie imię</label>
+            <input type="text" name="drugieimie">
+
+            <label>Nazwisko</label>
+            <input type="text" name="nazwisko" required>
+
+            <label>PESEL (id discord)</label>
+            <input type="text" name="pesel" required>
+
+            <label>Obywatelstwo</label>
+            <input type="text" name="obywatelstwo">
+        </div>
+
+        <div class="section">
+            <h3>DOKUMENT TOŻSAMOŚCI</h3>
+
+            <label>Typ dokumentu</label>
+            <select name="typdokumentu">
+                <option>ID DISCORD</option>
+                <option>ID ROBLOX</option>
+            </select>
+
+            <label>Numer dokumentu (ID)</label>
+            <input type="text" name="numerdokumentu">
+        </div>
+
+        <div class="section">
+            <h3>ADRES ZAMIESZKANIA</h3>
+
+            <label>Ulica</label>
+            <input type="text" name="ulica">
+
+            <label>Nr domu / lokalu</label>
+            <input type="text" name="dom">
+
+            <label>Kod pocztowy</label>
+            <input type="text" name="kod">
+
+            <label>Miasto</label>
+            <input type="text" name="miasto">
+
+            <label>Województwo</label>
+            <select name="woj">
+                <option>dolnośląskie</option>
+                <option>kujawsko-pomorskie</option>
+                <option>lubelskie</option>
+                <option>lubuskie</option>
+                <option>łódzkie</option>
+                <option>małopolskie</option>
+                <option>mazowieckie</option>
+                <option>opolskie</option>
+                <option>podkarpackie</option>
+                <option>podlaskie</option>
+                <option>pomorskie</option>
+                <option>śląskie</option>
+                <option>świętokrzyskie</option>
+                <option>warmińsko-mazurskie</option>
+                <option>wielkopolskie</option>
+                <option>zachodniopomorskie</option>
+            </select>
+        </div>
+
+        <div class="section">
+            <h3>DANE KONTAKTOWE</h3>
+
+            <label>Email (nie obowiązkowy)</label>
+            <input type="email" name="email">
+
+            <label>Telefon (nick discord)</label>
+            <input type="text" name="kontakt">
+        </div>
+
+        <div class="section">
+            <h3>DANE URZĘDOWE</h3>
+
+            <label>Wydział</label>
+            <select name="wydzial">
+                <option>Wydział Sekretariatu</option>
+                <option>Wydział Koordynacyjno-Legislacyjny</option>
+                <option>Wydział Spisu Głosowań</option>
+            </select>
+
+            <label>Instytucja (Wpisz Kancelaria Sejmu)</label>
+            <input type="text" name="instytucja">
+
+            <label>Zakres działalności</label>
+            <textarea name="opis"></textarea>
+        </div>
+
+        <div class="section">
+            <h3>OŚWIADCZENIA</h3>
+
+            <label><input type="checkbox" name="zgoda1"> Dane są prawdziwe</label>
+            <label><input type="checkbox" name="zgoda2"> Zgoda na przetwarzanie</label>
+        </div>
+
+        <button type="submit">ZŁÓŻ WNIOSEK</button>
+
+    </form>
+</div>
+
+<script>
+document.getElementById("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const data = Object.fromEntries(new FormData(e.target));
+
+  const res = await fetch("/api/form", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data)
+  });
+
+  if (res.ok) {
+    alert("Wysłano!");
+  } else {
+    alert("Błąd!");
+  }
+});
+</script>
+
+</body>
+</html>

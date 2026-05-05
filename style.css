@@ -1,0 +1,114 @@
+/* === OGÓLNE === */
+body {
+    background: #edf0fa;
+    margin: 0;
+    font-family: 'Libre Baskerville', serif;
+}
+
+/* === DOKUMENT === */
+.document {
+    width: 878px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 40px 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* === HEADER === */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    letter-spacing: 2px;
+    margin: 5px 0;
+}
+
+.header h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.godlo {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+/* === SEKCJE === */
+.section {
+    margin-bottom: 30px;
+}
+
+.section h3 {
+    border-bottom: 2px solid #000;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+/* === INPUTY === */
+label {
+    display: block;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #000;
+    padding: 6px 4px;
+    font-size: 14px;
+    background: transparent;
+    text-transform: uppercase;
+}
+
+textarea {
+    height: 80px;
+    resize: none;
+}
+
+/* === CHECKBOXY === */
+.section input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* === PRZYCISK === */
+button {
+    margin-top: 30px;
+    width: 100%;
+    padding: 12px;
+    background: #000;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #444;
+}
+
+/* === EFEKTY === */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-bottom: 2px solid #000;
+}
+
+/* === RESPONSYWNOŚĆ (lekka) === */
+@media (max-width: 900px) {
+    .document {
+        width: 95%;
+        padding: 20px;
+    }
+}

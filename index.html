@@ -1,186 +1,138 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<title>Formularz – Kancelaria Sejmu</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz – Kancelaria Sejmu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <!-- Pasek informacyjny RP -->
-<style>
-    .rp-warning-bar {
-        background-color: #ffcc00; /* Kolor ostrzegawczy - żółty */
-        color: #333;               /* Ciemny tekst dla kontrastu */
-        text-align: center;
-        padding: 10px 20px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-bottom: 2px solid #e6b800;
-        position: sticky;          /* Pasek zostaje na górze przy przewijaniu */
-        top: 0;
-        z-index: 9999;             /* Żeby nic go nie zasłoniło */
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .rp-warning-bar span {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-    /* Opcjonalna ikonka ostrzeżenia */
-    .rp-warning-bar::before {
-        content: '⚠️';
-        margin-right: 10px;
-    }
-</style>
-
-<div class="rp-warning-bar">
-    Strona została stworzona pod Roleplay – nie jest oficjalnym formularzem
-</div>
-    
-<div class="document">
-
-    <div class="header">
-        <img src="godlo.png" class="godlo">
-        <h1>KANCELARIA SEJMU</h1>
-        <h2>FORMULARZ ZGŁOSZENIOWY</h2>
+    <div class="rp-warning-bar">
+        Strona została stworzona pod Roleplay – nie jest oficjalnym formularzem
     </div>
 
-    <form id="form">
-
-        <div class="section">
-            <h3>DANE OSOBOWE</h3>
-
-            <label>Imię</label>
-            <input type="text" name="imie" required>
-
-            <label>Drugie imię</label>
-            <input type="text" name="drugieimie">
-
-            <label>Nazwisko</label>
-            <input type="text" name="nazwisko" required>
-
-            <label>PESEL (id discord)</label>
-            <input type="text" name="pesel" required>
-
-            <label>Obywatelstwo</label>
-            <input type="text" name="obywatelstwo">
+    <div class="document">
+        <div class="header">
+            <img src="godlo.png" alt="Godło" class="godlo">
+            <h1>KANCELARIA SEJMU</h1>
+            <h2>FORMULARZ ZGŁOSZENIOWY</h2>
         </div>
 
-        <div class="section">
-            <h3>DOKUMENT TOŻSAMOŚCI</h3>
+        <form id="form">
+            <!-- SEKCJA: DANE OSOBOWE -->
+            <div class="section">
+                <h3>DANE OSOBOWE</h3>
+                <div class="grid-row">
+                    <div class="field">
+                        <label>Imię</label>
+                        <input type="text" name="imie" required>
+                    </div>
+                    <div class="field">
+                        <label>Drugie imię</label>
+                        <input type="text" name="drugieimie">
+                    </div>
+                </div>
+                <label>Nazwisko</label>
+                <input type="text" name="nazwisko" required>
+                <label>Obywatelstwo</label>
+                <input type="text" name="obywatelstwo">
+            </div>
 
-            <label>Typ dokumentu</label>
-            <select name="typdokumentu">
-                <option>ID DISCORD</option>
-                <option>ID ROBLOX</option>
-            </select>
+            <!-- SEKCJA: WERYFIKACJA KONT -->
+            <div class="section">
+                <h3>TOŻSAMOŚĆ (ROBLOX & DISCORD)</h3>
+                <div class="grid-row">
+                    <div class="field">
+                        <label>NICK ROBLOX</label>
+                        <input type="text" name="roblox_nick" required>
+                    </div>
+                    <div class="field">
+                        <label>ID ROBLOX</label>
+                        <input type="text" name="roblox_id" required>
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="field">
+                        <label>NICK DISCORD</label>
+                        <input type="text" name="discord_nick" required>
+                    </div>
+                    <div class="field">
+                        <label>ID DISCORD (Cyfrowe)</label>
+                        <input type="text" name="discord_id" required>
+                    </div>
+                </div>
+            </div>
 
-            <label>Numer dokumentu (ID)</label>
-            <input type="text" name="numerdokumentu">
-        </div>
+            <!-- SEKCJA: ADRES -->
+            <div class="section">
+                <h3>ADRES ZAMIESZKANIA</h3>
+                <label>Ulica</label>
+                <input type="text" name="ulica">
+                <div class="grid-row">
+                    <div class="field-small">
+                        <label>Nr domu / lokalu</label>
+                        <input type="text" name="dom">
+                    </div>
+                    <div class="field-small">
+                        <label>Kod pocztowy</label>
+                        <input type="text" name="kod">
+                    </div>
+                </div>
+                <label>Miasto</label>
+                <input type="text" name="miasto">
+                <label>Województwo</label>
+                <select name="woj">
+                    <option>dolnośląskie</option>
+                    <option>kujawsko-pomorskie</option>
+                    <option>lubelskie</option>
+                    <option>lubuskie</option>
+                    <option>łódzkie</option>
+                    <option>małopolskie</option>
+                    <option>mazowieckie</option>
+                    <option>opolskie</option>
+                    <option>podkarpackie</option>
+                    <option>podlaskie</option>
+                    <option>pomorskie</option>
+                    <option>śląskie</option>
+                    <option>świętokrzyskie</option>
+                    <option>warmińsko-mazurskie</option>
+                    <option>wielkopolskie</option>
+                    <option>zachodniopomorskie</option>
+                </select>
+            </div>
 
-        <div class="section">
-            <h3>ADRES ZAMIESZKANIA</h3>
+            <!-- SEKCJA: URZĘDOWE -->
+            <div class="section">
+                <h3>DANE URZĘDOWE</h3>
+                <label>Wydział</label>
+                <select name="wydzial">
+                    <option>Wydział Sekretariatu</option>
+                    <option>Wydział Koordynacyjno-Legislacyjny</option>
+                    <option>Wydział Spisu Głosowań</option>
+                </select>
+                <label>Opis co robi dany wydział (Twoje zadania)</label>
+                <textarea name="opis" required></textarea>
+            </div>
 
-            <label>Ulica</label>
-            <input type="text" name="ulica">
+            <!-- SEKCJA: OŚWIADCZENIA -->
+            <div class="section">
+                <h3>OŚWIADCZENIA</h3>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" name="zgoda1" id="zgoda1" required>
+                    <label for="zgoda1" class="label-inline">Oświadczam, że podane dane są prawdziwe</label>
+                </div>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" name="zgoda2" id="zgoda2" required>
+                    <label for="zgoda2" class="label-inline">Zgadzam się na przetwarzanie danych w ramach Roleplay</label>
+                </div>
+            </div>
 
-            <label>Nr domu / lokalu</label>
-            <input type="text" name="dom">
+            <button type="submit">ZŁÓŻ WNIOSEK</button>
+        </form>
+    </div>
 
-            <label>Kod pocztowy</label>
-            <input type="text" name="kod">
-
-            <label>Miasto</label>
-            <input type="text" name="miasto">
-
-            <label>Województwo</label>
-            <select name="woj">
-                <option>dolnośląskie</option>
-                <option>kujawsko-pomorskie</option>
-                <option>lubelskie</option>
-                <option>lubuskie</option>
-                <option>łódzkie</option>
-                <option>małopolskie</option>
-                <option>mazowieckie</option>
-                <option>opolskie</option>
-                <option>podkarpackie</option>
-                <option>podlaskie</option>
-                <option>pomorskie</option>
-                <option>śląskie</option>
-                <option>świętokrzyskie</option>
-                <option>warmińsko-mazurskie</option>
-                <option>wielkopolskie</option>
-                <option>zachodniopomorskie</option>
-            </select>
-        </div>
-
-        <div class="section">
-            <h3>DANE KONTAKTOWE</h3>
-
-            <label>Email (nie obowiązkowy)</label>
-            <input type="email" name="email">
-
-            <label>ID DISCORD</label>
-            <input type="text" name="kontakt">
-        </div>
-
-        <div class="section">
-            <h3>DANE URZĘDOWE</h3>
-
-            <label>Wydział</label>
-            <select name="wydzial">
-                <option>Wydział Sekretariatu</option>
-                <option>Wydział Koordynacyjno-Legislacyjny</option>
-                <option>Wydział Spisu Głosowań</option>
-            </select>
-
-            <label>Instytucja (Wpisz Kancelaria Sejmu)</label>
-            <input type="text" name="instytucja">
-
-            <label>Zakres działalności</label>
-            <textarea name="opis"></textarea>
-        </div>
-
-        <div class="section">
-            <h3>OŚWIADCZENIA</h3>
-
-            <label><input type="checkbox" name="zgoda1"> Dane są prawdziwe</label>
-            <label><input type="checkbox" name="zgoda2"> Zgoda na przetwarzanie</label>
-        </div>
-
-        <button type="submit">ZŁÓŻ WNIOSEK</button>
-
-    </form>
-</div>
-
-<script>
-document.getElementById("form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const data = Object.fromEntries(new FormData(e.target));
-
-  const res = await fetch("/api/form", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(data)
-  });
-
-  if (res.ok) {
-    alert("Wysłano!");
-  } else {
-    alert("Błąd!");
-  }
-});
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>

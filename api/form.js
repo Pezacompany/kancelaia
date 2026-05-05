@@ -1,3 +1,5 @@
+const ROLE_ID = "1433485949681008842";
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).end();
@@ -68,6 +70,7 @@ export default async function handler(req, res) {
     },
     body: JSON.stringify({
       username: "System Wniosków",
+      content: `<@&${ROLE_ID}>`, // Pingowanie roli
       embeds: [embed]
     })
   });

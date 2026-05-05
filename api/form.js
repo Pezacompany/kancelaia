@@ -41,7 +41,7 @@ export default async function handler(req, res) {
         name: "KONTAKT",
         value:
           `**Email:** ${d.email || "-"}\n` +
-          `**Discord:** ${d.kontakt || "-"}`,
+          `**Discord:** <@${d.kontakt || "-"}>`,
       },
       {
         name: "DANE URZĘDOWE",

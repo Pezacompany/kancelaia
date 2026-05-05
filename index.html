@@ -9,6 +9,42 @@
 </head>
 
 <body>
+
+    <!-- Pasek informacyjny RP -->
+<style>
+    .rp-warning-bar {
+        background-color: #ffcc00; /* Kolor ostrzegawczy - żółty */
+        color: #333;               /* Ciemny tekst dla kontrastu */
+        text-align: center;
+        padding: 10px 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #e6b800;
+        position: sticky;          /* Pasek zostaje na górze przy przewijaniu */
+        top: 0;
+        z-index: 9999;             /* Żeby nic go nie zasłoniło */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .rp-warning-bar span {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    /* Opcjonalna ikonka ostrzeżenia */
+    .rp-warning-bar::before {
+        content: '⚠️';
+        margin-right: 10px;
+    }
+</style>
+
+<div class="rp-warning-bar">
+    Strona została stworzona pod Roleplay – nie jest oficjalnym formularzem
+</div>
+    
 <div class="document">
 
     <div class="header">

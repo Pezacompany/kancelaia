@@ -5,32 +5,41 @@ body {
     font-family: 'Libre Baskerville', serif;
 }
 
-/* === DOKUMENT === */
+.rp-warning-bar {
+    background-color: #ffcc00;
+    color: #333;
+    text-align: center;
+    padding: 10px 20px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
 .document {
-    width: 878px;
+    width: 800px;
     margin: 40px auto;
     background: #fff;
-    padding: 40px 20px;
+    padding: 60px;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* === HEADER === */
+/* === NAGŁÓWEK === */
 .header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 20px;
 }
 
 .header h1 {
     font-family: 'Playfair Display', serif;
     font-size: 26px;
-    letter-spacing: 2px;
     margin: 5px 0;
-}
-
-.header h2 {
-    font-size: 18px;
-    margin: 0;
 }
 
 .godlo {
@@ -38,7 +47,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* === SEKCJE === */
+/* === SEKCJE I POLA === */
 .section {
     margin-bottom: 30px;
 }
@@ -50,24 +59,30 @@ body {
     font-size: 16px;
 }
 
-/* === INPUTY === */
-label {
-    display: block;
-    font-size: 13px;
-    margin-top: 10px;
+.grid-row {
+    display: flex;
+    gap: 20px;
 }
 
-input[type="text"],
-input[type="email"],
-select,
-textarea {
+.field { flex: 1; }
+.field-small { width: 120px; }
+
+label {
+    display: block;
+    font-size: 12px;
+    margin-top: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+input[type="text"], select, textarea {
     width: 100%;
     border: none;
     border-bottom: 1px solid #000;
-    padding: 6px 4px;
+    padding: 8px 0;
     font-size: 14px;
     background: transparent;
-    text-transform: uppercase;
+    font-family: inherit;
 }
 
 textarea {
@@ -76,39 +91,32 @@ textarea {
 }
 
 /* === CHECKBOXY === */
-.section input[type="checkbox"] {
-    margin-right: 5px;
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.label-inline {
+    margin-top: 0 !important;
+    margin-left: 10px;
+    font-weight: normal;
+    text-transform: none;
 }
 
 /* === PRZYCISK === */
 button {
-    margin-top: 30px;
+    margin-top: 40px;
     width: 100%;
-    padding: 12px;
+    padding: 15px;
     background: #000;
     color: #fff;
     border: none;
     font-weight: bold;
-    letter-spacing: 1px;
     cursor: pointer;
+    letter-spacing: 2px;
 }
 
 button:hover {
-    background: #444;
-}
-
-/* === EFEKTY === */
-input:focus,
-textarea:focus,
-select:focus {
-    outline: none;
-    border-bottom: 2px solid #000;
-}
-
-/* === RESPONSYWNOŚĆ (lekka) === */
-@media (max-width: 900px) {
-    .document {
-        width: 95%;
-        padding: 20px;
-    }
+    background: #8B0000;
 }

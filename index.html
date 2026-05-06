@@ -2,164 +2,11 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formularz – Kancelaria Sejmu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold: #c5a059;
-            --dark-red: #8B0000;
-            --paper: #f9f9f7;
-        }
-
-        body {
-            background-color: #e0e0e0;
-            font-family: 'Libre Baskerville', serif;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-
-        .rp-warning-bar {
-            background: var(--dark-red);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-
-        .document {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--paper);
-            padding: 50px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
-            border: 1px solid #ccc;
-            position: relative;
-        }
-
-        .header {
-            text-align: center;
-            border-bottom: 2px solid var(--dark-red);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        .godlo {
-            width: 80px;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            margin: 0;
-            color: #000;
-            letter-spacing: 2px;
-        }
-
-        h2 {
-            font-size: 18px;
-            margin: 10px 0 0;
-            color: var(--dark-red);
-            font-weight: normal;
-        }
-
-        .section {
-            margin-bottom: 30px;
-        }
-
-        h3 {
-            font-size: 16px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            color: #444;
-            text-transform: uppercase;
-        }
-
-        label {
-            display: block;
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        input[type="text"], 
-        select, 
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #bbb;
-            background: #fff;
-            font-family: sans-serif;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            height: 100px;
-            resize: vertical;
-        }
-
-        .grid-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .checkbox-wrapper {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .checkbox-wrapper input {
-            margin-right: 10px;
-            width: 18px;
-            height: 18px;
-        }
-
-        .label-inline {
-            display: inline;
-            font-weight: normal;
-            margin: 0;
-        }
-
-        button {
-            width: 100%;
-            padding: 15px;
-            background: var(--dark-red);
-            color: white;
-            border: none;
-            font-size: 18px;
-            font-family: 'Playfair Display', serif;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background: #660000;
-        }
-
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-    </style>
+    <title>Kancelaria Sejmu</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="rp-warning-bar">
-        Strona została stworzona pod Roleplay – nie jest oficjalnym formularzem państwowym
-    </div>
-
+    <div class="rp-warning-bar">ROLEPLAY - FORMULARZ NIESTOWARZYSZONY</div>
     <div class="document">
         <div class="header">
             <img src="godlo.png" alt="Godło" class="godlo">
@@ -168,158 +15,26 @@
         </div>
 
         <form id="form">
-            <div class="section">
-                <h3>DANE OSOBOWE</h3>
-                <div class="grid-row">
-                    <div class="field">
-                        <label>Imię</label>
-                        <input type="text" name="imie" required>
-                    </div>
-                    <div class="field">
-                        <label>Drugie imię</label>
-                        <input type="text" name="drugieimie">
-                    </div>
-                </div>
-                <label>Nazwisko</label>
-                <input type="text" name="nazwisko" required>
-                <label>Obywatelstwo</label>
-                <input type="text" name="obywatelstwo">
-            </div>
+            <h3>DANE OSOBOWE</h3>
+            <input type="text" name="imie" placeholder="Imię" required>
+            <input type="text" name="nazwisko" placeholder="Nazwisko" required>
+            
+            <h3>TOŻSAMOŚĆ</h3>
+            <input type="text" name="roblox_nick" placeholder="Nick Roblox" required>
+            <input type="text" name="roblox_id" placeholder="ID Roblox" required>
+            <input type="text" name="discord_id" placeholder="ID Discord (cyfry)" required>
 
-            <div class="section">
-                <h3>TOŻSAMOŚĆ (ROBLOX & DISCORD)</h3>
-                <div class="grid-row">
-                    <div class="field">
-                        <label>NICK ROBLOX</label>
-                        <input type="text" name="roblox_nick" required>
-                    </div>
-                    <div class="field">
-                        <label>ID ROBLOX</label>
-                        <input type="text" name="roblox_id" required>
-                    </div>
-                </div>
-                <div class="grid-row">
-                    <div class="field">
-                        <label>NICK DISCORD</label>
-                        <input type="text" name="discord_nick" required>
-                    </div>
-                    <div class="field">
-                        <label>ID DISCORD (Cyfrowe)</label>
-                        <input type="text" name="discord_id" required>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section">
-                <h3>ADRES ZAMIESZKANIA</h3>
-                <label>Ulica</label>
-                <input type="text" name="ulica">
-                <div class="grid-row">
-                    <div class="field-small">
-                        <label>Nr domu / lokalu</label>
-                        <input type="text" name="dom">
-                    </div>
-                    <div class="field-small">
-                        <label>Kod pocztowy</label>
-                        <input type="text" name="kod">
-                    </div>
-                </div>
-                <label>Miasto</label>
-                <input type="text" name="miasto">
-                <label>Województwo</label>
-                <select name="woj">
-                    <option>dolnośląskie</option>
-                    <option>kujawsko-pomorskie</option>
-                    <option>lubelskie</option>
-                    <option>lubuskie</option>
-                    <option>łódzkie</option>
-                    <option>małopolskie</option>
-                    <option>mazowieckie</option>
-                    <option>opolskie</option>
-                    <option>podkarpackie</option>
-                    <option>podlaskie</option>
-                    <option>pomorskie</option>
-                    <option>śląskie</option>
-                    <option>świętokrzyskie</option>
-                    <option>warmińsko-mazurskie</option>
-                    <option>wielkopolskie</option>
-                    <option>zachodniopomorskie</option>
-                </select>
-            </div>
-
-            <div class="section">
-                <h3>DANE URZĘDOWE</h3>
-                <label>Wydział</label>
-                <select name="wydzial">
-                    <option>Wydział Sekretariatu</option>
-                    <option>Wydział Koordynacyjno-Legislacyjny</option>
-                    <option>Wydział Spisu Głosowań</option>
-                </select>
-                <label>Opis co robi dany wydział (Twoje zadania)</label>
-                <textarea name="opis" required></textarea>
-            </div>
-
-            <div class="section">
-                <h3>OŚWIADCZENIA</h3>
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" name="zgoda1" id="zgoda1" required>
-                    <label for="zgoda1" class="label-inline">Oświadczam, że podane dane są prawdziwe</label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" name="zgoda2" id="zgoda2" required>
-                    <label for="zgoda2" class="label-inline">Zgadzam się na przetwarzanie danych w ramach Roleplay</label>
-                </div>
-            </div>
+            <h3>URZĄD</h3>
+            <select name="wydzial">
+                <option>Wydział Sekretariatu</option>
+                <option>Wydział Koordynacyjno-Legislacyjny</option>
+                <option>Wydział Spisu Głosowań</option>
+            </select>
+            <textarea name="opis" placeholder="Opis zadań..." required></textarea>
 
             <button type="submit" id="btn">ZŁÓŻ WNIOSEK</button>
         </form>
     </div>
-
-    <script>
-        // Ta część odpowiada za wysyłkę danych
-        document.getElementById('form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const btn = document.getElementById('btn');
-            const originalText = btn.innerText;
-
-            // Blokujemy przycisk
-            btn.disabled = true;
-            btn.innerText = "WYSYŁANIE...";
-
-            // Zbieramy dane
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData.entries());
-
-            // Checkboxy muszą być przesłane jako true/false
-            data.zgoda1 = e.target.zgoda1.checked;
-            data.zgoda2 = e.target.zgoda2.checked;
-
-            try {
-                // WAŻNE: '/api/wniosek' musi istnieć na Twoim serwerze (Next.js)
-                const response = await fetch('/api/wniosek', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
-
-                if (response.ok) {
-                    alert('✅ Wniosek został pomyślnie złożony!');
-                    e.target.reset();
-                } else {
-                    const err = await response.json();
-                    alert(`❌ Błąd: ${err.error || 'Coś poszło nie tak'}`);
-                }
-            } catch (err) {
-                console.error(err);
-                alert('❌ Brak połączenia z serwerem. Upewnij się, że projekt jest opublikowany (np. na Vercel).');
-            } finally {
-                btn.disabled = false;
-                btn.innerText = originalText;
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

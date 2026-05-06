@@ -1,38 +1,47 @@
-// --- SYSTEM ŁADOWANIA (MAX 5 SEKUND) ---
-function startSystem() {
-    const loader = document.getElementById('preloader');
+// --- 1. EKRAN ŁADOWANIA (Gwarantowane 5 sekund) ---
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
     const doc = document.getElementById('doc');
 
-    // Po 5 sekundach ukrywamy loader i pokazujemy dokument
     setTimeout(() => {
-        loader.style.opacity = '0';
-        
+        preloader.style.opacity = '0';
         setTimeout(() => {
-            loader.style.display = 'none';
+            preloader.style.display = 'none';
             doc.style.display = 'block';
-            doc.style.opacity = '1';
-        }, 800); // czas na płynne zniknięcie
-    }, 5000); 
-}
+            setTimeout(() => doc.style.opacity = '1', 50);
+        }, 500);
+    }, 5000); // 5000ms = 5 sekund
+});
 
-// Odpal start przy załadowaniu strony
-window.onload = startSystem;
+// --- 2. OBSŁUGA FORMULARZA I MODALI ---
+const form = document.getElementById('form');
+const confirmModal = document.getElementById('confirmModal');
+const statusModal = document.getElementById('statusModal');
+const statusTitle = document.getElementById('statusTitle');
+const statusText = document.getElementById('statusText');
 
-// --- OBSŁUGA FORMULARZA ---
-document.getElementById('form').addEventListener('submit', async (e) => {
+let cachedData = null;
+
+// Kliknięcie przycisku "Wyślij" otwiera modal
+form.addEventListener('submit', (e) => {
     e.preventDefault();
+    cachedData = new FormData(form);
+    confirmModal.style.display = 'flex';
+});
 
-    // OKNO POTWIERDZENIA
-    const isSure = confirm("CZY JESTEŚ PEWNY?\n\nWysłanie dokumentu jest oficjalne i nie można go cofnąć. Czy wszystkie dane są poprawne?");
-    
-    if (!isSure) return;
+// Modal: Anuluj
+document.getElementById('modal-no').onclick = () => {
+    confirmModal.style.display = 'none';
+};
 
+// Modal: Potwierdź (Faktyczna wysyłka)
+document.getElementById('modal-yes').onclick = async () => {
+    confirmModal.style.display = 'none';
     const btn = document.getElementById('btn');
-    btn.innerText = "PRZESYŁANIE...";
+    btn.innerText = "PRZETWARZANIE...";
     btn.disabled = true;
 
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+    const data = Object.fromEntries(cachedData.entries());
 
     try {
         const res = await fetch('/api/wniosek', {
@@ -42,15 +51,28 @@ document.getElementById('form').addEventListener('submit', async (e) => {
         });
 
         if (res.ok) {
-            alert('DOKUMENT ZOSTAŁ ZAREJESTROWANY.');
-            e.target.reset();
+            showStatus("DOKUMENT PRZYJĘTY", "Twój kwestionariusz został pomyślnie zarejestrowany w systemie.", "#2e7d32");
+            form.reset();
         } else {
-            alert('BŁĄD SERWERA KANCELARII.');
+            showStatus("BŁĄD SYSTEMU", "Nie udało się połączyć z bazą danych Kancelarii.", "#8B0000");
         }
     } catch (err) {
-        alert('BRAK POŁĄCZENIA Z API.');
+        showStatus("BŁĄD KRYTYCZNY", "Brak odpowiedzi ze strony serwera.", "#8B0000");
     } finally {
-        btn.innerText = "ZATWIERDŹ I WYŚLIJ DOKUMENT";
+        btn.innerText = "WYŚLIJ OFICJALNY KWESTIONARIUSZ";
         btn.disabled = false;
     }
-});
+};
+
+// Funkcja pokazująca komunikat końcowy
+function showStatus(title, message, color) {
+    statusTitle.innerText = title;
+    statusTitle.style.color = color;
+    statusText.innerText = message;
+    statusModal.style.display = 'flex';
+}
+
+// Zamknięcie komunikatu
+document.getElementById('status-close').onclick = () => {
+    statusModal.style.display = 'none';
+};

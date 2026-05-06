@@ -6,7 +6,7 @@
     <title>Kancelaria Sejmu - Kwestionariusz</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* EKRAN ŁADOWANIA - NA CAŁY EKRAN */
+        /* --- EKRAN ŁADOWANIA --- */
         #preloader {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -16,13 +16,11 @@
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            opacity: 1;
             transition: opacity 0.8s ease;
         }
 
         .loader-circle {
-            width: 70px;
-            height: 70px;
+            width: 70px; height: 70px;
             border: 6px solid rgba(255, 255, 255, 0.1);
             border-top: 6px solid #8B0000;
             border-radius: 50%;
@@ -30,110 +28,117 @@
             margin-bottom: 20px;
         }
 
-        #preloader p {
-            color: white;
-            font-family: 'Arial', sans-serif;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 13px;
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* --- MODALE (PIĘKNE OKNA) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none; /* Domyślnie ukryte */
+            justify-content: center;
+            align-items: center;
+            z-index: 20000;
+            backdrop-filter: blur(5px);
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* DOKUMENT DOMYŚLNIE UKRYTY */
-        #doc { 
-            display: none; 
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-
-        .discord-alert {
-            background: #fff0f0;
-            border: 1px solid #8B0000;
-            padding: 15px;
-            margin-bottom: 25px;
-            color: #8B0000;
-            font-size: 13px;
-            font-weight: bold;
+        .modal-box {
+            background: #fdfdfc;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid #d1d1d1;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
             text-align: center;
+            font-family: 'EB Garamond', serif;
+            position: relative;
         }
+
+        .modal-box h3 {
+            font-family: 'Cinzel', serif;
+            color: #8B0000;
+            margin-top: 0;
+            letter-spacing: 2px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 12px 25px;
+            font-family: 'Cinzel', serif;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-confirm { background: #8B0000; color: white; }
+        .btn-cancel { background: #ccc; color: #333; }
+        .btn-confirm:hover { background: #600; }
+
+        /* Ukrywanie dokumentu na start */
+        #doc { display: none; opacity: 0; transition: opacity 1s ease; }
     </style>
 </head>
 <body>
 
+    <!-- SYSTEM ŁADOWANIA -->
     <div id="preloader">
         <div class="loader-circle"></div>
-        <p>Ładowanie systemu Kancelarii Sejmu...</p>
+        <p style="color: white; font-family: sans-serif; letter-spacing: 2px;">INICJALIZACJA SYSTEMU...</p>
     </div>
 
+    <!-- MODAL POTWIERDZENIA -->
+    <div id="confirmModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>POTWIERDZENIE WYSYŁKI</h3>
+            <p>Czy jesteś pewny, że chcesz złożyć oficjalny kwestionariusz do Kancelarii Sejmu? Dane zostaną trwale zapisane w archiwum.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn btn-confirm" id="modal-yes">TAK, WYŚLIJ</button>
+                <button class="modal-btn btn-cancel" id="modal-no">ANULUJ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL SUKCESU / BŁĘDU -->
+    <div id="statusModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 id="statusTitle">STATUS</h3>
+            <p id="statusText">Treść komunikatu...</p>
+            <button class="modal-btn btn-confirm" id="status-close">ROZUMIEM</button>
+        </div>
+    </div>
+
+    <!-- DOKUMENT -->
     <div class="document" id="doc">
         <div class="watermark">KANCELARIA SEJMU RP</div>
-        
         <div class="header">
             <img src="https://cdn.discordapp.com/attachments/1474465662880452729/1501611096010920016/Pasted-20260409-200010_preview_rev_2_1.png?ex=69fcb3cf&is=69fb624f&hm=4408ea6b82b221aa8cd7f2822706dbf896550156c8862fc4f0e9b82327035773" class="godlo">
             <h1>KANCELARIA SEJMU</h1>
             <h2>KWESTIONARIUSZ OSOBOWY KANDYDATA</h2>
         </div>
 
-        <div class="discord-alert">
-            INFORMACJA: BRAK OBECNOŚCI NA SERWERZE GŁÓWNYM ORAZ KANCELARII SKUTKUJE NATYCHMIASTOWYM ODRZUCENIEM PODANIA.
-        </div>
-
         <form id="form">
+            <!-- Tutaj Twoje sekcje I, II, III, IV które masz w kodzie -->
             <div class="section-title">I. DANE PERSONALNE</div>
             <div class="grid">
-                <div class="field"><label>Imię pierwsze</label><input type="text" name="imie" required></div>
-                <div class="field"><label>Drugie imię</label><input type="text" name="drugieimie"></div>
-            </div>
-            <div class="grid">
+                <div class="field"><label>Imię</label><input type="text" name="imie" required></div>
                 <div class="field"><label>Nazwisko</label><input type="text" name="nazwisko" required></div>
-                <div class="field"><label>Obywatelstwo</label><input type="text" name="obywatelstwo" value="Polskie" required></div>
             </div>
 
-            <div class="section-title">II. ADRES ZAMIESZKANIA</div>
-            <div class="grid">
-                <div class="field" style="grid-column: span 2;"><label>Ulica i numer</label><input type="text" name="ulica" required></div>
-            </div>
-            <div class="grid">
-                <div class="field"><label>Kod pocztowy</label><input type="text" name="kod" required></div>
-                <div class="field"><label>Miejscowość</label><input type="text" name="miasto" required></div>
-            </div>
-            <label>Województwo</label>
-            <select name="woj">
-                <option>mazowieckie</option><option>małopolskie</option><option>śląskie</option><option>dolnośląskie</option>
-                <option>wielkopolskie</option><option>pomorskie</option><option>łódzkie</option><option>zachodniopomorskie</option>
-                <option>lubelskie</option><option>podkarpackie</option><option>kujawsko-pomorskie</option><option>podlaskie</option>
-                <option>lubuskie</option><option>świętokrzyskie</option><option>opolskie</option><option>warmińsko-mazurskie</option>
-            </select>
-
-            <div class="section-title">III. IDENTYFIKACJA (ROBLOX / DISCORD)</div>
+            <div class="section-title">III. IDENTYFIKACJA SYSTEMOWA</div>
             <div class="grid">
                 <div class="field"><label>Nick Roblox</label><input type="text" name="roblox_nick" required></div>
-                <div class="field"><label>ID Roblox</label><input type="text" name="roblox_id" required></div>
-            </div>
-            <div class="grid">
-                <div class="field"><label>Nick Discord</label><input type="text" name="discord_nick" required></div>
-                <div class="field"><label>ID Discord (Cyfrowe)</label><input type="text" name="discord_id" required></div>
+                <div class="field"><label>ID Discord</label><input type="text" name="discord_id" required></div>
             </div>
 
-            <div class="section-title">IV. WYBÓR WYDZIAŁU</div>
-            <select name="wydzial">
-                <option>Wydział Sekretariatu</option>
-                <option>Wydział Koordynacyjno-Legislacyjny</option>
-                <option>Wydział Spisu Głosowań</option>
-            </select>
-            <label style="margin-top:10px;">Opis kompetencji</label>
-            <textarea name="opis" rows="4" required></textarea>
+            <!-- Reszta pól... -->
 
-            <div class="checkbox-group">
-                <div class="checkbox-item"><input type="checkbox" required><span>Potwierdzam prawdziwość danych.</span></div>
-                <div class="checkbox-item"><input type="checkbox" required><span>Akceptuję warunki rekrutacji.</span></div>
-            </div>
-
-            <button type="submit" id="btn">ZATWIERDŹ I WYŚLIJ DOKUMENT</button>
+            <button type="submit" id="btn" style="margin-top: 40px;">ZŁÓŻ OFICJALNY WNIOSEK</button>
         </form>
     </div>
 

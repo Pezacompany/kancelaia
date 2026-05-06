@@ -6,7 +6,7 @@
     <title>Kancelaria Sejmu - Kwestionariusz</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Styl dla ekranu ładowania */
+        /* EKRAN ŁADOWANIA - NA CAŁY EKRAN */
         #preloader {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -15,8 +15,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
+            z-index: 10000;
+            opacity: 1;
+            transition: opacity 0.8s ease;
         }
 
         .loader-circle {
@@ -25,16 +26,16 @@
             border: 6px solid rgba(255, 255, 255, 0.1);
             border-top: 6px solid #8B0000;
             border-radius: 50%;
-            animation: spin 1.2s linear infinite;
-            margin-bottom: 25px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
         }
 
         #preloader p {
-            color: #ffffff;
-            font-family: 'Cinzel', serif;
-            letter-spacing: 3px;
-            font-size: 14px;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            font-size: 13px;
         }
 
         @keyframes spin {
@@ -42,35 +43,32 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Ukrywanie dokumentu przed załadowaniem */
-        #doc { display: none; }
-
-        /* Styl ostrzeżenia o Discordzie */
-        .discord-alert {
-            background: #fff4f4;
-            border-left: 5px solid #8B0000;
-            padding: 20px;
-            margin-bottom: 30px;
-            color: #444;
-            font-size: 14px;
-            line-height: 1.6;
+        /* DOKUMENT DOMYŚLNIE UKRYTY */
+        #doc { 
+            display: none; 
+            opacity: 0;
+            transition: opacity 1s ease;
         }
 
-        .discord-alert strong {
+        .discord-alert {
+            background: #fff0f0;
+            border: 1px solid #8B0000;
+            padding: 15px;
+            margin-bottom: 25px;
             color: #8B0000;
-            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <!-- SYSTEM ŁADOWANIA -->
     <div id="preloader">
         <div class="loader-circle"></div>
         <p>Ładowanie systemu Kancelarii Sejmu...</p>
     </div>
 
-    <!-- WŁAŚCIWY DOKUMENT -->
     <div class="document" id="doc">
         <div class="watermark">KANCELARIA SEJMU RP</div>
         
@@ -81,7 +79,7 @@
         </div>
 
         <div class="discord-alert">
-            <strong>Weryfikacja tożsamości:</strong> Informujemy, iż podanie zostanie automatycznie <strong>odrzucone</strong>, jeżeli wskazany użytkownik nie zostanie odnaleziony na serwerze głównym oraz oficjalnym serwerze komunikacyjnym Kancelarii Sejmu.
+            INFORMACJA: BRAK OBECNOŚCI NA SERWERZE GŁÓWNYM ORAZ KANCELARII SKUTKUJE NATYCHMIASTOWYM ODRZUCENIEM PODANIA.
         </div>
 
         <form id="form">
@@ -95,7 +93,7 @@
                 <div class="field"><label>Obywatelstwo</label><input type="text" name="obywatelstwo" value="Polskie" required></div>
             </div>
 
-            <div class="section-title">II. ADRES I MIEJSCE ZAMIESZKANIA</div>
+            <div class="section-title">II. ADRES ZAMIESZKANIA</div>
             <div class="grid">
                 <div class="field" style="grid-column: span 2;"><label>Ulica i numer</label><input type="text" name="ulica" required></div>
             </div>
@@ -111,7 +109,7 @@
                 <option>lubuskie</option><option>świętokrzyskie</option><option>opolskie</option><option>warmińsko-mazurskie</option>
             </select>
 
-            <div class="section-title">III. IDENTYFIKACJA SYSTEMOWA (RP)</div>
+            <div class="section-title">III. IDENTYFIKACJA (ROBLOX / DISCORD)</div>
             <div class="grid">
                 <div class="field"><label>Nick Roblox</label><input type="text" name="roblox_nick" required></div>
                 <div class="field"><label>ID Roblox</label><input type="text" name="roblox_id" required></div>
@@ -121,19 +119,18 @@
                 <div class="field"><label>ID Discord (Cyfrowe)</label><input type="text" name="discord_id" required></div>
             </div>
 
-            <div class="section-title">IV. INFORMACJE O ZATRUDNIENIU</div>
-            <label>Wnioskowany Wydział</label>
+            <div class="section-title">IV. WYBÓR WYDZIAŁU</div>
             <select name="wydzial">
                 <option>Wydział Sekretariatu</option>
                 <option>Wydział Koordynacyjno-Legislacyjny</option>
                 <option>Wydział Spisu Głosowań</option>
             </select>
-            <label style="margin-top:10px;">Zakres obowiązków / Opis</label>
+            <label style="margin-top:10px;">Opis kompetencji</label>
             <textarea name="opis" rows="4" required></textarea>
 
             <div class="checkbox-group">
-                <div class="checkbox-item"><input type="checkbox" required><span>Oświadczam, że powyższe dane są zgodne ze stanem faktycznym.</span></div>
-                <div class="checkbox-item"><input type="checkbox" required><span>Wyrażam zgodę na przetwarzanie danych w strukturach Kancelarii Sejmu RP.</span></div>
+                <div class="checkbox-item"><input type="checkbox" required><span>Potwierdzam prawdziwość danych.</span></div>
+                <div class="checkbox-item"><input type="checkbox" required><span>Akceptuję warunki rekrutacji.</span></div>
             </div>
 
             <button type="submit" id="btn">ZATWIERDŹ I WYŚLIJ DOKUMENT</button>

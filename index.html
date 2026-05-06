@@ -6,28 +6,51 @@
     <title>Kancelaria Sejmu - Kwestionariusz Osobowy</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* --- DODANY STYL PASKA RP --- */
-        .rp-warning-bar {
+        /* --- PASEK ROLEPLAY (NA SAMEJ GÓRZE) --- */
+        body {
+            margin: 0;
+            padding: 0;
+            /* Odsunięcie treści o wysokość paska, żeby go nie zasłaniało */
+            padding-top: 50px; 
+        }
+
+        .rp-top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             background-color: #1a1a1a;
             color: #ffffff;
             text-align: center;
-            padding: 12px 20px;
+            padding: 15px 0;
             font-family: 'Arial', sans-serif;
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            border-bottom: 3px solid #ff0000;
-            position: sticky;
-            top: 0;
-            z-index: 30000; /* Wyżej niż modale i preloader */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            border-bottom: 4px solid #ff0000;
+            z-index: 99999; /* Musi być nad preloaderem i wszystkim innym */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
-        .rp-highlight { color: #ff4d4d; }
-        .rp-icon { color: #ff0000; margin-right: 8px; animation: pulse 2s infinite; display: inline-block; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-        /* --- TWOJE STYLE SYSTEMOWE (LOADER I MODALE) --- */
+        .rp-highlight {
+            color: #ff4d4d;
+        }
+
+        .rp-dot {
+            color: #ff0000;
+            margin-right: 8px;
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        /* --- TWOJE STYLE SYSTEMOWE --- */
         #preloader {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -87,7 +110,7 @@
         .btn-confirm { background: #8B0000; color: white; }
         .btn-cancel { background: #ccc; color: #333; }
 
-        #doc { display: none; opacity: 0; transition: opacity 1s ease; }
+        #doc { display: none; opacity: 0; transition: opacity 1s ease; margin-top: 20px; }
 
         .discord-alert {
             background: #fff0f0;
@@ -104,16 +127,19 @@
 </head>
 <body>
 
-    <div class="rp-warning-bar">
-        <span class="rp-icon">●</span> 
-        Strona została stworzona pod <span class="rp-highlight">Roleplay</span> – nie jest oficjalnym formularzem
+    <!-- CZARNO-CZERWONY PASEK RP -->
+    <div class="rp-top-bar">
+        <span class="rp-dot">●</span> 
+        Strona stworzona pod <span class="rp-highlight">Roleplay</span> – nie jest oficjalnym formularzem
     </div>
 
+    <!-- EKRAN ŁADOWANIA -->
     <div id="preloader">
         <div class="loader-circle"></div>
         <p style="color: white; font-family: 'Cinzel', serif; letter-spacing: 2px;">Ładowanie Systemu Kancelarii Sejmu...</p>
     </div>
 
+    <!-- MODAL POTWIERDZENIA -->
     <div id="confirmModal" class="modal-overlay">
         <div class="modal-box">
             <h3>POTWIERDZENIE</h3>
@@ -123,6 +149,7 @@
         </div>
     </div>
 
+    <!-- MODAL STATUSU -->
     <div id="statusModal" class="modal-overlay">
         <div class="modal-box">
             <h3 id="statusTitle">STATUS</h3>
@@ -131,6 +158,7 @@
         </div>
     </div>
 
+    <!-- DOKUMENT -->
     <div class="document" id="doc">
         <div class="watermark">KANCELARIA SEJMU RP</div>
         
@@ -163,6 +191,7 @@
                 <div class="field"><label>Kod pocztowy</label><input type="text" name="kod" required></div>
                 <div class="field"><label>Miejscowość</label><input type="text" name="miasto" required></div>
             </div>
+            
             <label>Województwo</label>
             <select name="woj">
                 <option>mazowieckie</option><option>małopolskie</option><option>śląskie</option><option>dolnośląskie</option>
@@ -200,6 +229,7 @@
         </form>
     </div>
 
+    <!-- Pamiętaj o podpięciu swojego script.js -->
     <script src="script.js"></script>
 </body>
 </html>

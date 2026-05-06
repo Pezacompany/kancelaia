@@ -113,10 +113,6 @@
             gap: 20px;
         }
 
-        .field-small {
-            flex: 1;
-        }
-
         .checkbox-wrapper {
             display: flex;
             align-items: center;
@@ -279,6 +275,51 @@
         </form>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Ta część odpowiada za wysyłkę danych
+        document.getElementById('form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const btn = document.getElementById('btn');
+            const originalText = btn.innerText;
+
+            // Blokujemy przycisk
+            btn.disabled = true;
+            btn.innerText = "WYSYŁANIE...";
+
+            // Zbieramy dane
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            // Checkboxy muszą być przesłane jako true/false
+            data.zgoda1 = e.target.zgoda1.checked;
+            data.zgoda2 = e.target.zgoda2.checked;
+
+            try {
+                // WAŻNE: '/api/wniosek' musi istnieć na Twoim serwerze (Next.js)
+                const response = await fetch('/api/wniosek', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    alert('✅ Wniosek został pomyślnie złożony!');
+                    e.target.reset();
+                } else {
+                    const err = await response.json();
+                    alert(`❌ Błąd: ${err.error || 'Coś poszło nie tak'}`);
+                }
+            } catch (err) {
+                console.error(err);
+                alert('❌ Brak połączenia z serwerem. Upewnij się, że projekt jest opublikowany (np. na Vercel).');
+            } finally {
+                btn.disabled = false;
+                btn.innerText = originalText;
+            }
+        });
+    </script>
 </body>
 </html>

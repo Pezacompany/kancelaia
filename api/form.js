@@ -2,7 +2,6 @@ const ROLE_ID = "1433485949681008842";
 const WEBHOOK_URL = "https://discord.com/api/webhooks/1501272079171981343/Bwt84LREQng6wqt9l0agX_zjDjx_ioa16kCYjRta9xUKEpIG9we3hmHZkFyvb_N5XK27";
 
 export default async function handler(req, res) {
-  // 1. Sprawdzenie metody
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -10,13 +9,6 @@ export default async function handler(req, res) {
   try {
     const d = req.body;
 
-    // 2. Walidacja danych (opcjonalna, ale zalecana)
-    // Jeśli d jest puste, oznacza to, że body nie zostało sparsowane
-    if (!d || Object.keys(d).length === 0) {
-      return res.status(400).json({ error: "Puste body zapytania" });
-    }
-
-    // 3. Budowa embeda z fallbackami (żeby uniknąć pustych pól)
     const embed = {
       title: "📄 NOWY WNIOSEK – KANCELARIA SEJMU",
       color: 0x8B0000,
@@ -46,7 +38,6 @@ export default async function handler(req, res) {
       timestamp: new Date().toISOString()
     };
 
-    // 4. Wysyłka do Discorda
     const response = await fetch(WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -56,17 +47,13 @@ export default async function handler(req, res) {
       })
     });
 
-    // 5. Sprawdzenie odpowiedzi Discorda
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Błąd Discord API:", errorData);
-      return res.status(response.status).json({ error: "Discord odrzucił żądanie", details: errorData });
+      const errData = await response.json();
+      return res.status(response.status).json({ error: "Discord Error", details: errData });
     }
 
     return res.status(200).json({ ok: true });
-
   } catch (err) {
-    console.error("Błąd serwera:", err);
-    return res.status(500).json({ error: "Błąd wewnętrzny serwera", details: err.message });
+    return res.status(500).json({ error: "Błąd serwera", message: err.message });
   }
 }

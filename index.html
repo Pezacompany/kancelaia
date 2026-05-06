@@ -2,37 +2,71 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Kancelaria Sejmu</title>
+    <title>Kancelaria Sejmu - Kwestionariusz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="rp-warning-bar">ROLEPLAY - FORMULARZ NIESTOWARZYSZONY</div>
     <div class="document">
+        <div class="watermark">POUFNE</div>
         <div class="header">
-            <img src="godlo.png" alt="Godło" class="godlo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Coat_of_arms_of_Poland.svg/1200px-Coat_of_arms_of_Poland.svg.png" class="godlo">
             <h1>KANCELARIA SEJMU</h1>
-            <h2>FORMULARZ ZGŁOSZENIOWY</h2>
+            <h2>KWESTIONARIUSZ OSOBOWY KANDYDATA</h2>
         </div>
 
         <form id="form">
-            <h3>DANE OSOBOWE</h3>
-            <input type="text" name="imie" placeholder="Imię" required>
-            <input type="text" name="nazwisko" placeholder="Nazwisko" required>
-            
-            <h3>TOŻSAMOŚĆ</h3>
-            <input type="text" name="roblox_nick" placeholder="Nick Roblox" required>
-            <input type="text" name="roblox_id" placeholder="ID Roblox" required>
-            <input type="text" name="discord_id" placeholder="ID Discord (cyfry)" required>
+            <div class="section-title">I. DANE PERSONALNE</div>
+            <div class="grid">
+                <div class="field"><label>Imię pierwsze</label><input type="text" name="imie" required></div>
+                <div class="field"><label>Drugie imię</label><input type="text" name="drugieimie"></div>
+            </div>
+            <div class="grid">
+                <div class="field"><label>Nazwisko</label><input type="text" name="nazwisko" required></div>
+                <div class="field"><label>Obywatelstwo</label><input type="text" name="obywatelstwo" value="Polskie" required></div>
+            </div>
 
-            <h3>URZĄD</h3>
+            <div class="section-title">II. ADRES I MIEJSCE ZAMIESZKANIA</div>
+            <div class="grid">
+                <div class="field" style="grid-column: span 2;"><label>Ulica i numer</label><input type="text" name="ulica" required></div>
+            </div>
+            <div class="grid">
+                <div class="field"><label>Kod pocztowy</label><input type="text" name="kod" required></div>
+                <div class="field"><label>Miejscowość</label><input type="text" name="miasto" required></div>
+            </div>
+            <label>Województwo</label>
+            <select name="woj">
+                <option>mazowieckie</option><option>małopolskie</option><option>śląskie</option><option>dolnośląskie</option>
+                <option>wielkopolskie</option><option>pomorskie</option><option>łódzkie</option><option>zachodniopomorskie</option>
+                <option>lubelskie</option><option>podkarpackie</option><option>kujawsko-pomorskie</option><option>podlaskie</option>
+                <option>lubuskie</option><option>świętokrzyskie</option><option>opolskie</option><option>warmińsko-mazurskie</option>
+            </select>
+
+            <div class="section-title">III. IDENTYFIKACJA SYSTEMOWA (RP)</div>
+            <div class="grid">
+                <div class="field"><label>Nick Roblox</label><input type="text" name="roblox_nick" required></div>
+                <div class="field"><label>ID Roblox</label><input type="text" name="roblox_id" required></div>
+            </div>
+            <div class="grid">
+                <div class="field"><label>Nick Discord</label><input type="text" name="discord_nick" required></div>
+                <div class="field"><label>ID Discord (Cyfrowe)</label><input type="text" name="discord_id" required></div>
+            </div>
+
+            <div class="section-title">IV. INFORMACJE O ZATRUDNIENIU</div>
+            <label>Wnioskowany Wydział</label>
             <select name="wydzial">
                 <option>Wydział Sekretariatu</option>
                 <option>Wydział Koordynacyjno-Legislacyjny</option>
                 <option>Wydział Spisu Głosowań</option>
             </select>
-            <textarea name="opis" placeholder="Opis zadań..." required></textarea>
+            <label style="margin-top:10px;">Zakres obowiązków / Opis</label>
+            <textarea name="opis" rows="4" required></textarea>
 
-            <button type="submit" id="btn">ZŁÓŻ WNIOSEK</button>
+            <div class="checkbox-group">
+                <div class="checkbox-item"><input type="checkbox" required><span>Oświadczam, że powyższe dane są zgodne ze stanem faktycznym.</span></div>
+                <div class="checkbox-item"><input type="checkbox" required><span>Wyrażam zgodę na przetwarzanie danych w strukturach Kancelarii Sejmu RP.</span></div>
+            </div>
+
+            <button type="submit" id="btn">ZATWIERDŹ I WYŚLIJ DOKUMENT</button>
         </form>
     </div>
     <script src="script.js"></script>

@@ -109,6 +109,48 @@
     </div>
 
     <!-- DOKUMENT -->
+    <!-- Pasek informacyjny RP (Czarno-Czerwony) -->
+<style>
+    .rp-warning-bar {
+        background-color: #1a1a1a; /* Głęboka czerń */
+        color: #ffffff;             /* Biały tekst */
+        text-align: center;
+        padding: 12px 20px;
+        font-family: 'Arial', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        border-bottom: 3px solid #ff0000; /* Czerwona linia na dole */
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    /* Akcent kolorystyczny dla słowa "Roleplay" */
+    .rp-highlight {
+        color: #ff4d4d;
+    }
+
+    /* Opcjonalny efekt pulsowania dla ikony */
+    .rp-icon {
+        color: #ff0000;
+        margin-right: 8px;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.4; }
+        100% { opacity: 1; }
+    }
+</style>
+
+<div class="rp-warning-bar">
+    <span class="rp-icon">●</span> 
+    Strona została stworzona pod <span class="rp-highlight">Roleplay</span> – nie jest oficjalnym formularzem
+</div>
     <div class="document" id="doc">
         <div class="watermark">KANCELARIA SEJMU RP</div>
         

@@ -1,1 +1,191 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kancelaria Sejmu RP — Portal Główny</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap');
 
+        body { 
+            background: #1a1a1a; 
+            margin: 0; 
+            padding: 0; 
+            padding-top: 50px; /* Miejsce na pasek RP */
+            font-family: 'EB Garamond', serif;
+            color: #fdfdfc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- PASEK ROLEPLAY (Zgodny z Twoim kwestionariuszem) --- */
+        .rp-top-bar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: #1a1a1a; color: #ffffff; text-align: center;
+            padding: 15px 0; font-family: 'Arial', sans-serif; font-size: 13px;
+            font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px;
+            border-bottom: 4px solid #ff0000; z-index: 99999;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+        .rp-highlight { color: #ff4d4d; }
+        .rp-dot { color: #ff0000; margin-right: 8px; animation: pulse 1.5s infinite; display: inline-block; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* --- GŁÓWNY KONTENER PORTALU --- */
+        .portal-container {
+            width: 100%;
+            max-width: 1000px;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* --- ELEGANCKI NAGŁÓWEK --- */
+        .main-header {
+            text-align: center;
+            border-bottom: 3px double #8B0000;
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+        .godlo { width: 100px; margin-bottom: 15px; }
+        h1 { font-family: 'Cinzel', serif; font-size: 32px; margin: 0; letter-spacing: 2px; }
+        h2 { font-family: 'Cinzel', serif; font-size: 16px; color: #8B0000; margin: 5px 0; letter-spacing: 1px; }
+
+        /* --- SEKCJE / GRID --- */
+        .section-title { 
+            font-family: 'Cinzel', serif; 
+            font-size: 16px; 
+            font-weight: bold; 
+            border-bottom: 1px solid #8B0000; 
+            margin: 40px 0 20px; 
+            padding-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-layout { grid-template-columns: 1fr; }
+        }
+
+        /* --- KARTY I BLOKI INFORMAREK --- */
+        .card {
+            background: #242424;
+            border: 1px solid #333;
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #8B0000;
+        }
+        .card h3 { font-family: 'Cinzel', serif; margin-top: 0; font-size: 18px; color: #fdfdfc; }
+        .card p { font-size: 16px; line-height: 1.6; color: #ccc; }
+
+        /* --- PANEL BOCZNY (AKCJE / LINKI) --- */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* --- PRZYCISK LINKUJĄCY DO PODZAKŁADKI (KWESTIONARIUSZA) --- */
+        .cta-button {
+            display: block;
+            text-align: center;
+            padding: 20px;
+            background: #8B0000;
+            color: white;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            border: 1px solid transparent;
+        }
+        .cta-button:hover {
+            background: #fdfdfc;
+            color: #1a1a1a;
+            border-color: #8B0000;
+        }
+
+        .info-box {
+            background: #1f1f1f;
+            border: 1px dashed #444;
+            padding: 20px;
+            font-style: italic;
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="rp-top-bar">
+        <span class="rp-dot">●</span> 
+        Strona stworzona pod <span class="rp-highlight">Roleplay</span> – oficjalny portal Kancelarii Sejmu RP
+        <span class="rp-dot">●</span> 
+    </div>
+
+    <div class="portal-container">
+        
+        <div class="main-header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Coat_of_arms_of_Poland.svg/1200px-Coat_of_arms_of_Poland.svg.png" class="godlo" alt="Godło RP">
+            <h1>KANCELARIA SEJMU</h1>
+            <h2>SYSTEM INFORMACYJNY KANCELARII SEJMU RZECZYPOSPOLITEJ POLSKIEJ</h2>
+        </div>
+
+        <div class="grid-layout">
+            
+            <main>
+                <div class="section-title">I. KOMUNIKATY I AKTUALNOŚCI</div>
+                
+                <div class="card">
+                    <h3>Otwarcie rekrutacji do Wydziałów Kancelarii</h3>
+                    <p>Szef Kancelarii Sejmu ogłasza rozpoczęcie naboru uzupełniającego dla urzędników państwowych. Kandydaci mogą składać kwestionariusze osobowe drogą elektroniczną przez dedykowany panel rekrutacyjny w menu bocznym.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Modernizacja systemów legislacyjnych</h3>
+                    <p>Wydział Koordynacyjno-Legislacyjny zakończył wdrażanie nowego standardu formatowania druków sejmowych. Zmiany mają na celu usprawnienie procesu legislacyjnego podczas nadchodzących posiedzeń Sejmu RP.</p>
+                </div>
+
+                <div class="section-title">II. STRUKTURA ORGANIZACYJNA</div>
+                <p>Kancelaria Sejmu wykonuje zadania organizacyjno-techniczne i doradcze związane z działalnością Sejmu i jego organów. Dzieli się na kluczowe piony zadaniowe:</p>
+                <ul>
+                    <li><strong>Wydział Sekretariatu</strong> — odpowiedzialny za obieg dokumentacji i wsparcie administracyjne Marszałka Sejmu.</li>
+                    <li><strong>Wydział Koordynacyjno-Legislacyjny</strong> — czuwający nad poprawnością prawną projektów ustaw oraz uchwał.</li>
+                    <li><strong>Wydział Spisu Głosowań</strong> — zapewniający techniczną i bezstronną obsługę liczenia głosów podczas obrad.</li>
+                </ul>
+            </main>
+
+            <aside class="sidebar">
+                <div class="section-title">III. PANEL OBYWATELA</div>
+                
+                <a href="kwestionariusz.html" class="cta-button">
+                    ZŁÓŻ KWESTIONARIUSZ KANDYDATA
+                </a>
+
+                <div class="info-box">
+                    <strong>Uwaga:</strong> Dostęp do systemów kancelaryjnych wymaga zweryfikowanego konta w systemie Discord oraz obecności na serwerze głównym. Wszystkie wnioski podlegają szczegółowej weryfikacji kadrowej.
+                </div>
+                
+                <div class="info-box" style="text-align: center;">
+                    <strong>Szef Kancelarii Sejmu</strong><br>
+                    <span style="font-size: 12px; color: #8b0000; font-family: 'Cinzel', serif;">Dokumentacja RP</span>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+</body>
+</html>

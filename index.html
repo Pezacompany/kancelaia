@@ -3,411 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kancelaria Sejmu RP — Główny Portal Rządowy</title>
+    <title>Kancelaria Sejmu RP — Biuletyn Informacyjny</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Open+Sans:wght@400;600;700&display=swap');
 
         :root {
-            --bg-main: #121212;
-            --bg-card: #1a1a1a;
-            --bg-accent: #8B0000;
-            --bg-accent-hover: #b30000;
-            --text-gold: #dfc58d;
-            --text-light: #fdfdfc;
-            --text-muted: #aaaaaa;
-            --border-color: #333333;
+            --bg-main: #fcfcfc;
+            --bg-paper: #ffffff;
+            --gov-red: #8B0000;
+            --text-dark: #222222;
+            --text-muted: #555555;
+            --border-gray: #d9d9d9;
         }
 
         body { 
             background: var(--bg-main); 
             margin: 0; 
             padding: 0; 
-            padding-top: 50px; 
-            font-family: 'EB Garamond', serif;
-            color: var(--text-light);
+            padding-top: 45px; /* Miejsce na pasek RP */
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
         }
 
-        /* --- PASEK ROLEPLAY (Zgodny ze stylem) --- */
+        /* --- URZĘDOWY PASEK ROLEPLAY (Czysty, czytelny) --- */
         .rp-top-bar {
             position: fixed; top: 0; left: 0; width: 100%;
-            background-color: #0b0b0b; color: #ffffff; text-align: center;
-            padding: 15px 0; font-family: 'Arial', sans-serif; font-size: 12px;
-            font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
-            border-bottom: 4px solid var(--bg-accent); z-index: 99999;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            background-color: #111111; color: #ffffff; text-align: center;
+            padding: 12px 0; font-size: 11px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            border-bottom: 3px solid var(--gov-red); z-index: 99999;
         }
         .rp-highlight { color: #ff4d4d; }
-        .rp-dot { color: var(--bg-accent); margin-right: 8px; animation: pulse 1.5s infinite; display: inline-block; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* --- PASEK NAWIGACJI SYSTEMOWEJ --- */
-        .system-nav {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            box-sizing: border-box;
-            border-bottom: 1px solid var(--border-color);
-            margin-top: 20px;
-        }
-
-        .nav-links { display: flex; gap: 15px; }
-        .nav-btn {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-light);
-            padding: 10px 20px;
-            font-family: 'Cinzel', serif;
-            font-size: 12px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .nav-btn:hover, .nav-btn.active {
-            background: var(--bg-accent);
-            border-color: var(--bg-accent);
-            box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
-        }
-
-        /* --- GEOMETRIA PORTALU --- */
+        /* --- GŁÓWNY KONTENER PORTALU --- */
         .portal-container {
             width: 100%;
-            max-width: 1200px;
-            padding: 30px 20px;
+            max-width: 950px;
+            padding: 40px 20px;
             box-sizing: border-box;
         }
 
-        /* --- POTĘŻNY NAGŁÓWEK --- */
+        /* --- GODŁO I OFICJALNY NAGŁÓWEK --- */
         .main-header {
             text-align: center;
-            border-bottom: 3px double var(--bg-accent);
-            padding-bottom: 30px;
-            margin-bottom: 40px;
-            position: relative;
+            border-bottom: 2px solid var(--gov-red);
+            padding-bottom: 25px;
+            margin-bottom: 35px;
         }
-        .godlo { width: 110px; margin-bottom: 15px; filter: drop-shadow(0px 0px 10px rgba(255,255,255,0.1)); }
-        h1 { font-family: 'Cinzel', serif; font-size: 36px; margin: 0; letter-spacing: 3px; }
-        h2 { font-family: 'Cinzel', serif; font-size: 15px; color: var(--bg-accent); margin: 5px 0; letter-spacing: 2px; }
+        .godlo { width: 85px; margin-bottom: 15px; }
+        h1 { font-family: 'Cinzel', serif; font-size: 28px; margin: 0; color: #111; letter-spacing: 1px; }
+        h2 { font-family: 'Cinzel', serif; font-size: 13px; color: var(--gov-red); margin: 5px 0; letter-spacing: 1px; font-weight: 700; }
 
-        /* --- STATYSTYKI NA ŻYWO (Dojebany Dashboard) --- */
-        .live-stats {
+        /* --- UKŁAD DWUKOLUMNOWY --- */
+        .grid-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-        .stat-card::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--bg-accent);
-        }
-        .stat-val { font-family: 'JetBrains Mono', monospace; font-size: 28px; color: var(--text-gold); font-weight: bold; }
-        .stat-label { font-family: 'Cinzel', serif; font-size: 11px; color: var(--text-muted); margin-top: 5px; text-transform: uppercase; }
-
-        /* --- PODZIAŁ NA SEKCJE (ZAKŁADKI PLUG & PLAY) --- */
-        .tab-content { display: none; }
-        .tab-content.active { display: grid; grid-template-columns: 2.5fr 1.2fr; gap: 40px; animation: fadeIn 0.5s ease; }
-        
-        @media (max-width: 900px) {
-            .tab-content.active { grid-template-columns: 1fr; }
+            grid-template-columns: 1.8fr 1.2fr;
+            gap: 35px;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) {
+            .grid-layout { grid-template-columns: 1fr; }
+        }
 
+        /* --- SEKCJE / TYTUŁY --- */
         .section-title { 
-            font-family: 'Cinzel', serif; font-size: 15px; font-weight: bold; 
-            border-bottom: 1px solid var(--bg-accent); margin-bottom: 20px; 
-            padding-bottom: 5px; letter-spacing: 1px; color: var(--text-gold);
+            font-family: 'Cinzel', serif; 
+            font-size: 14px; 
+            font-weight: 700; 
+            border-bottom: 1px solid var(--border-gray); 
+            margin: 0 0 20px 0; 
+            padding-bottom: 6px;
+            color: #111;
+            letter-spacing: 0.5px;
         }
 
-        /* --- ARCHITEKTURA ELEMENTÓW (KARTY) --- */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            margin-bottom: 25px;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* --- BLOKI OBWIESZCZEŃ --- */
+        .announcement-box {
+            background: var(--bg-paper);
+            border: 1px solid var(--border-gray);
+            border-left: 4px solid var(--gov-red);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
         }
-        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--bg-accent); }
-        .card h3 { font-family: 'Cinzel', serif; margin-top: 0; font-size: 18px; color: var(--text-light); }
-        .card p { font-size: 16px; line-height: 1.7; color: #d1d1d1; }
-        .card-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--bg-accent); margin-bottom: 10px; }
+        .announcement-box h3 { margin: 0 0 10px 0; font-size: 16px; color: #111; font-weight: 700; }
+        .announcement-box p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--text-muted); }
+        .announcement-date { font-size: 11px; font-weight: bold; color: var(--gov-red); margin-bottom: 6px; text-transform: uppercase; }
 
-        /* --- DZIENNIK USTAW (Dojebany Wygląd Tabeli) --- */
-        .law-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 15px;
-            margin-top: 15px;
+        /* --- HIERARCHIA URZĘDNICZA (Kancelaria) --- */
+        .hierarchy-list {
+            background: var(--bg-paper);
+            border: 1px solid var(--border-gray);
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
         }
-        .law-table th, .law-table td {
-            border: 1px solid var(--border-color);
-            padding: 12px 15px;
-            text-align: left;
+        .role-group {
+            margin-bottom: 18px;
         }
-        .law-table th { font-family: 'Cinzel', serif; background: #1f1f1f; color: var(--text-gold); font-size: 12px; }
-        .law-table tr:nth-child(even) { background: #161616; }
-        .law-status {
-            display: inline-block; padding: 3px 8px; font-family: 'JetBrains Mono', monospace;
-            font-size: 11px; font-weight: bold; text-transform: uppercase; border-radius: 3px;
+        .role-group:last-child { margin-bottom: 0; }
+        
+        .role-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--gov-red);
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
         }
-        .status-active { background: rgba(46, 125, 50, 0.2); color: #4caf50; border: 1px solid #4caf50; }
-        .status-pending { background: rgba(239, 108, 0, 0.2); color: #ff9800; border: 1px solid #ff9800; }
+        .role-members {
+            font-size: 14px;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+        .username-discord {
+            color: #444;
+            font-size: 13px;
+        }
 
-        /* --- TERMINARZ POSIEDZEŃ --- */
-        .timeline-item {
-            border-left: 2px solid var(--border-color);
-            padding-left: 20px;
-            position: relative;
-            margin-bottom: 25px;
-        }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -6px; top: 5px; width: 10px; height: 10px;
-            background: var(--bg-accent); border-radius: 50%; box-shadow: 0 0 8px var(--bg-accent);
-        }
-        .time-badge { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-gold); }
-        .timeline-title { font-family: 'Cinzel', serif; font-size: 15px; margin: 5px 0; }
-
-        /* --- PANEL BOCZNY & PRZYCISKI AKCJI --- */
-        .sidebar { display: flex; flex-direction: column; gap: 25px; }
+        /* --- PRZYCISK BIULETYNU / REKRUTACJA --- */
         .cta-button {
-            display: block; text-align: center; padding: 20px; background: var(--bg-accent);
-            color: white; text-decoration: none; font-family: 'Cinzel', serif;
-            font-weight: bold; font-size: 13px; letter-spacing: 2px; transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6); border: 1px solid transparent;
+            display: block;
+            text-align: center;
+            padding: 15px;
+            background: #111111;
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: 0.2s;
+            border: 1px solid #111111;
+            margin-bottom: 20px;
         }
-        .cta-button:hover { background: var(--text-light); color: var(--bg-main); border-color: var(--bg-accent); }
-
-        .secure-box {
-            background: #0f0f0f; border: 1px dashed var(--bg-accent); padding: 20px; position: relative;
-        }
-        .secure-badge {
-            position: absolute; top: -10px; right: 15px; background: var(--bg-accent);
-            font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 2px 6px; font-weight: bold;
-        }
-
-        /* HARD-RP SYSTEM WATERMARK */
-        .bg-watermark {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg);
-            font-family: 'Cinzel', serif; font-size: 12vw; color: rgba(255,255,255,0.015);
-            pointer-events: none; z-index: -1; white-space: nowrap; font-weight: bold;
+        .cta-button:hover {
+            background: var(--bg-paper);
+            color: #111111;
+            border-color: var(--gov-red);
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-watermark">KANCELARIA SEJMU RP</div>
-
     <div class="rp-top-bar">
-        <span class="rp-dot">●</span> 
-        SISTEM CENTRALNY KANCELARII SEJMU RP — PROTOKÓŁ BEZPIECZEŃSTWA <span class="rp-highlight">WŁĄCZONY</span>
-        <span class="rp-dot">●</span> 
+        Strona stworzona pod <span class="rp-highlight">Roleplay</span> – oficjalny portal informacyjny Kancelarii Sejmu RP
     </div>
-
-    <nav class="system-nav">
-        <div style="font-family: 'Cinzel', serif; font-size: 14px; font-weight: bold; letter-spacing: 1px;">KS-LINK v4.1</div>
-        <div class="nav-links">
-            <button class="nav-btn active" onclick="switchTab('glowne')">Główny Portal</button>
-            <button class="nav-btn" onclick="switchTab('legislacja')">Dziennik Ustaw</button>
-            <button class="nav-btn" onclick="switchTab('struktura')">Struktura Izby</button>
-        </div>
-    </nav>
 
     <div class="portal-container">
         
-        <div class="main-header">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Coat_of_arms_of_Poland.svg/1200px-Coat_of_arms_of_Poland.svg.png" class="godlo" alt="Godło RP">
+        <header class="main-header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Coat_of_arms_of_Poland.svg/1200px-Coat_of_arms_of_Poland.svg.png" class="godlo" alt="Godło Rzeczypospolitej Polskiej">
             <h1>KANCELARIA SEJMU</h1>
-            <h2>ZINTEGROWANY SYSTEM INFORMACYJNY RZECZYPOSPOLITEJ POLSKIEJ</h2>
-        </div>
+            <h2>BIULETYN INFORMACJI PUBLICZNEJ URZĘDU</h2>
+        </header>
 
-        <div class="live-stats">
-            <div class="stat-card">
-                <div class="stat-val">460</div>
-                <div class="stat-label">Obsadzonych Mandatów</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-val">B-104</div>
-                <div class="stat-label">Bieżący Druk Sejmowy</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-val">3</div>
-                <div class="stat-label">Wydziały Aktywne</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-val" style="color: #4caf50;">ONLINE</div>
-                <div class="stat-label">System Informacyjny</div>
-            </div>
-        </div>
-
-        <div id="glowne" class="tab-content active">
+        <div class="grid-layout">
+            
             <main>
-                <div class="section-title">I. CENTRUM DOKUMENTACJI I AKTUALNOŚCI</div>
+                <h2 class="section-title">OBWIESZCZENIA KANCELARII SEJMU</h2>
                 
-                <div class="card">
-                    <div class="card-meta">KOMUNIKAT SZEFA KANCELARII • ID: 2026/05/14-01</div>
-                    <h3>Zarządzenie nr 12 w sprawie porządku prac administracyjnych</h3>
-                    <p>Zgodnie z decyzją Szefa Kancelarii Sejmu, wprowadza się kategoryczny wymóg cyfryzacji wszystkich wniosków urlopowych i pracowniczych. System rekrutacyjny w Wydziale Kadr został w pełni przeniesiony do modułu kwestionariuszy sieciowych.</p>
+                <div class="announcement-box">
+                    <div class="announcement-date">Obwieszczenie nr 3/2026</div>
+                    <h3>Otwarcie naboru do pionów urzędniczych</h3>
+                    <p>Szef Kancelarii Sejmu ogłasza uruchomienie oficjalnego procesu rekrutacyjnego dla kandydatów na urzędników państwowych. Kwestionariusze osobowe należy składać drogą elektroniczną przez system aplikacyjny dostępny w panelu bocznym.</p>
                 </div>
 
-                <div class="card">
-                    <div class="card-meta">WYDZIAŁ SPISU GŁOSOWAŃ • ID: 2026/05/10-04</div>
-                    <h3>Zakończenie wdrożenia systemu weryfikacji tożsamości poselskiej</h3>
-                    <p>Informatycy Kancelarii zakończyli integrację bazy danych Roblox ID z listą obecności na sali posiedzeń. Od najbliższego posiedzenia, system automatycznie odrzuci głosy oddane z nieuwierzytelnionych kont cyfrowych.</p>
+                <div class="announcement-box">
+                    <div class="announcement-date">Obwieszczenie nr 2/2026</div>
+                    <h3>Aktualizacja struktury kadrowej urzędu</h3>
+                    <p>Niniejszym publikuje się zaktualizowany wykaz osób pełniących kluczowe funkcje administracyjne i kierownicze w strukturach Kancelarii Sejmu RP. Zmiany wchodzą w życie z dniem ogłoszenia.</p>
                 </div>
 
-                <div class="card">
-                    <div class="card-meta">INFORMACJA SYSTEMOWA • ID: 2026/05/01-02</div>
-                    <h3>Archiwizacja aktów prawnych z ubiegłej kadencji</h3>
-                    <p>Wszystkie uchwały i dekrety podjęte w poprzednim okresie legislacyjnym zostały przeniesione do zintegrowanego Dziennika Ustaw (zakładka u góry ekranu). Dostęp dla obywateli pozostaje jawny.</p>
+                <div class="announcement-box">
+                    <div class="announcement-date">Komunikat Techniczny</div>
+                    <h3>Weryfikacja tożsamości w systemach RP</h3>
+                    <p>Przypomina się wszystkim aplikantom oraz czynnym pracownikom o obowiązku zachowania pełnej zgodności identyfikatorów numerycznych Discord oraz Roblox z danymi podawanymi w oficjalnych dokumentach.</p>
                 </div>
             </main>
 
-            <aside class="sidebar">
-                <div class="section-title">II. PANEL DOSTĘPOWY OBYWATELA</div>
-                
+            <aside>
+                <h2 class="section-title">PANEL AKCJI</h2>
                 <a href="kwestionariusz.html" class="cta-button">
-                    URUCHOM KWESTIONARIUSZ KANDYDATA
+                    ZŁÓŻ KWESTIONARIUSZ OSOBOWY
                 </a>
 
-                <div class="secure-box">
-                    <div class="secure-badge">WERYFIKACJA</div>
-                    <p style="font-size: 13px; line-height: 1.5; color: var(--text-muted); margin: 0;">
-                        <strong>Wymogi rekrutacyjne:</strong> Każdy ubiegający się o status urzędnika Kancelarii Sejmu RP zobowiązany jest do pełnej autoryzacji profilu Discord oraz konta Roblox. Brak zgodności danych numerycznych ID skutkuje natychmiastową blokadą procesu aplikacyjnego.
-                    </p>
-                </div>
+                <h2 class="section-title">KIEROWNICTWO URZĘDU</h2>
+                <div class="hierarchy-list">
+                    
+                    <div class="role-group">
+                        <div class="role-title">Szef Kancelarii Sejmu</div>
+                        <div class="role-members">@AFKgmm <span class="username-discord">(@PAWELKRUL123911)</span></div>
+                    </div>
 
-                <div class="section-title">III. HARMONOGRAM NAJBLIŻSZYCH OBRAD</div>
-                <div style="background: var(--bg-card); padding: 20px; border: 1px solid var(--border-color);">
-                    <div class="timeline-item">
-                        <div class="time-badge">18 MAJA 2026 • 18:00</div>
-                        <div class="timeline-title">Otwarcie 12. Posiedzenia Sejmu RP</div>
-                        <p style="font-size:13px; color: var(--text-muted); margin:0;">Debata nad projektem ustawy o finansowaniu infrastruktury państwowej.</p>
+                    <div class="role-group">
+                        <div class="role-title">Zastępca Szefa Kancelarii Sejmu</div>
+                        <div class="role-members">
+                            @Warchant1 <span class="username-discord">(@Warchant_1)</span>,<br>
+                            @-ˋˏ ⛧ ~ Jedynkuś ~ ⛧ ˎˊ-
+                        </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">20 MAJA 2026 • 19:30</div>
-                        <div class="timeline-title">Posiedzenie Komisji Regulaminowej</div>
-                        <p style="font-size:13px; color: var(--text-muted); margin:0;">Weryfikacja wniosków dyscyplinarnych i zmian w regulaminie wewnętrznym.</p>
+
+                    <div class="role-group">
+                        <div class="role-title">Przewodniczący Zarządu</div>
+                        <div class="role-members">@Janusz Klapek | FBIPIES</div>
                     </div>
+
+                    <div class="role-group">
+                        <div class="role-title">Zastępca Przewodniczącego Zarządu</div>
+                        <div class="role-members">@Tyski <span class="username-discord">(@LubiePlackielo2137)</span></div>
+                    </div>
+
+                    <div class="role-group">
+                        <div class="role-title">Rzecznik Kancelarii Sejmu</div>
+                        <div class="role-members">@[RKS] Paweł Monka</div>
+                    </div>
+
+                    <div class="role-group">
+                        <div class="role-title">Zarząd Kancelarii Sejmu</div>
+                        <div class="role-members">
+                            @prof. Stanisław Boguszewski,<br>
+                            @Tyski <span class="username-discord">(@LubiePlackielo2137)</span>
+                        </div>
+                    </div>
+
+                    <div class="role-group">
+                        <div class="role-title">Dyrektor Generalny biura Marszałka</div>
+                        <div class="role-members">@Warchant1 <span class="username-discord">(@Warchant_1)</span></div>
+                    </div>
+
                 </div>
             </aside>
+
         </div>
-
-        <div id="legislacja" class="tab-content">
-            <main style="grid-column: span 2;">
-                <div class="section-title">DZIENNIK USTAW RZECZYPOSPOLITEJ POLSKIEJ — REJESTR CYFROWY</div>
-                <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 25px;">
-                    Poniższa tabela stanowi oficjalną, jawną bazę aktów prawnych, uchwał oraz zarządzeń procesowanych przez Kancelarię Sejmu RP.
-                </p>
-
-                <table class="law-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 120px;">Sygnatura Aktu</th>
-                            <th style="width: 140px;">Data Publikacji</th>
-                            <th>Nazwa Dokumentu / Opis Skrócony</th>
-                            <th style="width: 160px;">Status Prawny</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Dz.U. 2026 poz. 41</strong></td>
-                            <td>12.05.2026</td>
-                            <td>Ustawa o powołaniu Korpusu Urzędniczego Kancelarii Sejmu i regulacji płac.</td>
-                            <td><span class="law-status status-active">Obowiązuje</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Dz.U. 2026 poz. 40</strong></td>
-                            <td>08.05.2026</td>
-                            <td>Uchwała Rady Ministrów w sprawie rewizji budżetu na obronność i utrzymanie struktur bezpieczeństwa RP.</td>
-                            <td><span class="law-status status-active">Obowiązuje</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Druk nr B-104</strong></td>
-                            <td>05.05.2026</td>
-                            <td>Projekt nowelizacji kodeksu karnego dotyczący immunitetów poselskich i procedur karnych RP.</td>
-                            <td><span class="law-status status-pending">W Komisji</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Dz.U. 2026 poz. 39</strong></td>
-                            <td>28.04.2026</td>
-                            <td>Zarządzenie Marszałka Sejmu w sprawie organizacji i zabezpieczenia technicznego Sal Posiedzeń.</td>
-                            <td><span class="law-status status-active">Obowiązuje</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </main>
-        </div>
-
-        <div id="struktura" class="tab-content">
-            <main>
-                <div class="section-title">STRUKTURA ORGANIZACYJNA KANCELARII SEJMU</div>
-                <p style="font-size: 17px; line-height: 1.6;">
-                    Kancelaria Sejmu jest najwyższym urzędem urzędniczo-doradczym, zapewniającym suwerenne działanie Parlamentu RP. W jej skład wchodzą wyspecjalizowane jednostki strukturalne:
-                </p>
-
-                <div class="card">
-                    <h3>1. Wydział Sekretariatu</h3>
-                    <p>Jednostka odpowiedzialna za bezpośrednią obsługę kancelaryjną Marszałka Sejmu, Wicemarszałków oraz Prezydium Sejmu. Do jej głównych zadań należy kontrola nad obiegiem dokumentów niejawnych, redakcja pism oficjalnych oraz prowadzenie protokołów spotkań dyplomatycznych.</p>
-                </div>
-
-                <div class="card">
-                    <h3>2. Wydział Koordynacyjno-Legislacyjny</h3>
-                    <p>Rdzeń prawny Kancelarii Sejmu. Nadzoruje pełną ścieżkę legislacyjną każdego projektu ustawy. Urzędnicy tego wydziału odpowiadają za analizę konstytucyjną, wprowadzanie poprawek redakcyjnych oraz nadawanie sygnatur w Dzienniku Ustaw.</p>
-                </div>
-
-                <div class="card">
-                    <h3>3. Wydział Spisu Głosowań</h3>
-                    <p>Organ gwarantujący transparentność i bezstronność procesów wyborczych wewnątrz izby. Zajmuje się autoryzacją systemów zliczających głosy, nadzorem nad kartami do głosowania i publikacją oficjalnych wyników w systemach rządowych.</p>
-                </div>
-            </main>
-
-            <aside class="sidebar">
-                <div class="section-title">ZWIERZCHNICTWO URZĘDU</div>
-                <div class="secure-box" style="text-align: center; border-style: solid;">
-                    <span style="font-family: 'Cinzel', serif; font-size: 14px; font-weight: bold; color: var(--text-gold);">MARSZAŁEK SEJMU RP</span>
-                    <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 10px 0;">
-                    <span style="font-size: 15px; font-style: italic; color: #ccc;">Naczelny organ władzy ustawodawczej i reprezentant Izby.</span>
-                </div>
-                
-                <div class="secure-box" style="text-align: center; border-style: solid;">
-                    <span style="font-family: 'Cinzel', serif; font-size: 14px; font-weight: bold; color: var(--text-gold);">SZEF KANCELARII SEJMU</span>
-                    <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 10px 0;">
-                    <span style="font-size: 15px; font-style: italic; color: #ccc;">Kierownik administracyjny całego aparatu urzędniczego RP.</span>
-                </div>
-            </aside>
-        </div>
-
     </div>
 
-    <script>
-        function switchTab(tabId) {
-            // Ukryj wszystkie panele
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
-
-            // Deaktywuj wszystkie przyciski w menu
-            const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            // Aktywuj wybrany panel i przycisk
-            document.getElementById(tabId).classList.add('active');
-            
-            // Znajdź przycisk, który wywołał funkcję i nadaj mu klasę active
-            const clickedBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(tabId));
-            if(clickedBtn) clickedBtn.classList.add('active');
-        }
-    </script>
 </body>
 </html>

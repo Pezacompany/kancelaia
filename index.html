@@ -16,10 +16,15 @@
             --border-gray: #d9d9d9;
         }
 
+        /* Sprytny trik CSS, żeby stopka zawsze była na samym dole ekranu, nawet przy małej ilości treści */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         body { 
             background: var(--bg-main); 
-            margin: 0; 
-            padding: 0; 
             padding-top: 45px; /* Miejsce na pasek RP */
             font-family: 'Open Sans', sans-serif;
             color: var(--text-dark);
@@ -44,6 +49,7 @@
             max-width: 950px;
             padding: 30px 20px;
             box-sizing: border-box;
+            flex: 1 0 auto; /* Wypycha stopkę w dół */
         }
 
         /* --- OFICJALNY NAGŁÓWEK URZĘDU --- */
@@ -190,6 +196,52 @@
             color: #111111;
             border-color: var(--gov-red);
         }
+
+        /* --- NOWA URZĘDOWA STOPKA --- */
+        .gov-footer {
+            width: 100%;
+            background: #111111;
+            color: #ffffff;
+            font-size: 12px;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 4px solid var(--gov-red);
+            flex-shrink: 0; /* Zabezpieczenie przed kurczeniem stopek */
+            display: flex;
+            justify-content: center;
+        }
+        .footer-content {
+            width: 100%;
+            max-width: 910px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        @media (max-width: 600px) {
+            .footer-content { flex-direction: column; text-align: center; gap: 15px; }
+        }
+        .footer-left h4 {
+            font-family: 'Cinzel', serif;
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        .footer-left p {
+            margin: 0;
+            color: #aaaaaa;
+            font-size: 11px;
+        }
+        .footer-right {
+            text-align: right;
+            font-size: 11px;
+            color: #777777;
+            font-family: monospace;
+        }
+        @media (max-width: 600px) {
+            .footer-right { text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -293,7 +345,7 @@
             <div class="gov-card" style="border-left: 3px solid var(--gov-red);">
                 <div class="meta-info">Obwieszczenie nr 2/2026</div>
                 <h3>Ustalenie nowego składu osobowego zarządu</h3>
-                <p>Działając w porozumieniu z Kierownictwem Urzędu, podaje się do wiadomości publicznej pełną listę powołań na stanowiska urzędnicze oraz zarządcze. Zmiany mają na celu optymalizację bieżącej organizacji pracy izby niższej.</p>
+                <p>Działając w porozumieniu z Kierownictwem Urzędu, podaje się do wiadomości publicznej pełną lista powołań na stanowiska urzędnicze oraz zarządcze. Zmiany mają na celu optymalizację bieżącej organizacji pracy izby niższej.</p>
             </div>
 
             <div class="gov-card" style="border-left: 3px solid var(--gov-red);">
@@ -305,20 +357,29 @@
 
     </div>
 
+    <footer class="gov-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <h4>Kancelaria Sejmu Rzeczypospolitej Polskiej</h4>
+                <p>© 2026 Kancelaria Sejmu RP. Wszelkie prawa zastrzeżone na potrzeby projektu Roleplay.</p>
+            </div>
+            <div class="footer-right">
+                BIP-KS SYSTEM v4.2<br>
+                STATUS: POŁĄCZENIE BEZPIECZNE
+            </div>
+        </div>
+    </footer>
+
     <script>
         function openTab(tabId) {
-            // Ukryj wszystkie zakładki
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
 
-            // Odbierz klasę 'active' wszystkim przyciskom nawigacji
             const buttons = document.querySelectorAll('.nav-link');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Pokaż wybraną zakładkę
             document.getElementById(tabId).classList.add('active');
 
-            // Nadaj klasę 'active' przyciskowi, który został kliknięty
             const clickedButton = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(tabId));
             if (clickedButton) clickedButton.classList.add('active');
         }

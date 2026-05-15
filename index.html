@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kancelaria Sejmu RP</title>
+    <title>Kancelaria Sejmu RP — Biuletyn Informacji Publicznej</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Open+Sans:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;700&family=Open+Sans:wght@400;600;700&display=swap');
 
         :root {
             --bg-main: #fcfcfc;
             --bg-paper: #ffffff;
             --gov-red: #8B0000;
             --text-dark: #222222;
+            --text-muted: #555555;
             --border-gray: #d9d9d9;
         }
 
-        html, body { height: 100%; margin: 0; padding: 0; }
+        /* Sprytny trik CSS, żeby stopka zawsze była na samym dole ekranu, nawet przy małej ilości treści */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         body { 
             background: var(--bg-main); 
-            padding-top: 45px; 
+            padding-top: 45px; /* Miejsce na pasek RP */
             font-family: 'Open Sans', sans-serif;
             color: var(--text-dark);
             display: flex;
@@ -26,159 +33,408 @@
             align-items: center;
         }
 
+        /* --- URZĘDOWY PASEK ROLEPLAY --- */
         .rp-top-bar {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: #111; color: #fff; text-align: center;
-            padding: 12px 0; font-size: 11px; font-weight: 700;
-            text-transform: uppercase; border-bottom: 3px solid var(--gov-red); z-index: 9999;
+            background-color: #111111; color: #ffffff; text-align: center;
+            padding: 12px 0; font-size: 11px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            border-bottom: 3px solid var(--gov-red); z-index: 99999;
+        }
+        .rp-highlight { color: #ff4d4d; }
+
+        /* --- GŁÓWNY KONTENER PORTALU --- */
+        .portal-container {
+            width: 100%;
+            max-width: 950px;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            flex: 1 0 auto; /* Wypycha stopkę w dół */
         }
 
-        .portal-container { width: 100%; max-width: 900px; padding: 20px; box-sizing: border-box; flex: 1 0 auto; }
+        /* --- OFICJALNY NAGŁÓWEK URZĘDU --- */
+        .main-header {
+            text-align: center;
+            padding-bottom: 20px;
+            position: relative;
+        }
+        .godlo { width: 180px; height: auto; margin-bottom: 12px; }
+        h1 { font-family: 'Cinzel', serif; font-size: 26px; margin: 0; color: #111; letter-spacing: 1px; }
+        h2 { font-family: 'Cinzel', serif; font-size: 13px; color: var(--gov-red); margin: 5px 0; letter-spacing: 1px; font-weight: 700; }
+
+        /* --- URZĘDOWA NAWIGACJA (ZAKŁADKI) --- */
+        .gov-nav {
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid var(--border-gray);
+            border-bottom: 2px solid var(--gov-red);
+            background: var(--bg-paper);
+            width: 100%;
+            margin-bottom: 35px;
+        }
+        .nav-link {
+            background: transparent;
+            border: none;
+            padding: 15px 25px;
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 0.5px;
+        }
+        .nav-link:hover {
+            color: var(--gov-red);
+            background: #f5f5f5;
+        }
+        .nav-link.active {
+            color: #ffffff;
+            background: var(--gov-red);
+        }
+
+        /* --- LOGIKA WYŚWIETLANIA ZAKŁADEK --- */
+        .tab-content {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title { 
+            font-family: 'Cinzel', serif; 
+            font-size: 15px; 
+            font-weight: 700; 
+            border-bottom: 1px solid var(--border-gray); 
+            margin: 0 0 25px 0; 
+            padding-bottom: 8px;
+            color: #111;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* --- ARCHITEKTURA WIZUALNA (BLOKI / KARTY) --- */
+        .gov-card {
+            background: var(--bg-paper);
+            border: 1px solid var(--border-gray);
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .gov-card h3 { margin: 0 0 12px 0; font-size: 17px; color: #111; font-weight: 700; }
+        .gov-card p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--text-muted); }
         
-        .main-header { text-align: center; padding-bottom: 20px; }
-        .godlo { width: 180px; height: auto; object-fit: contain; }
-        h1 { font-family: 'Cinzel', serif; font-size: 26px; margin: 15px 0 0 0; }
-        h2 { font-family: 'Cinzel', serif; font-size: 13px; color: var(--gov-red); margin: 5px 0 0 0; }
+        .meta-info { 
+            font-size: 11px; 
+            font-weight: 700; 
+            color: var(--gov-red); 
+            margin-bottom: 6px; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+        }
 
-        .gov-nav { display: flex; justify-content: center; border-top: 1px solid var(--border-gray); border-bottom: 2px solid var(--gov-red); background: var(--bg-paper); width: 100%; margin-bottom: 30px; }
-        .nav-link { background: transparent; border: none; padding: 15px 25px; font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700; cursor: pointer; color: var(--text-dark); }
-        .nav-link:hover { color: var(--gov-red); }
-        .nav-link.active { color: #fff; background: var(--gov-red); }
+        /* --- STRUKTURA ZARZĄDU / KIEROWNICTWA --- */
+        .hierarchy-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .officer-row {
+            background: var(--bg-paper);
+            border: 1px solid var(--border-gray);
+            border-left: 4px solid var(--gov-red);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        @media (max-width: 600px) {
+            .officer-row { flex-direction: column; align-items: flex-start; gap: 5px; }
+        }
+        .officer-role {
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #111;
+        }
+        .officer-name {
+            font-size: 14px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        .discord-tag {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 400;
+        }
 
-        .tab-content { display: none; width: 100%; }
-        .tab-content.active { display: block; }
-        .section-title { font-family: 'Cinzel', serif; font-size: 15px; border-bottom: 1px solid var(--border-gray); padding-bottom: 8px; margin-bottom: 20px; }
+        /* --- PRZYCISK URZĘDOWY (REKRUTACJA) --- */
+        .cta-button {
+            display: inline-block;
+            text-align: center;
+            padding: 15px 30px;
+            background: #111111;
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: 0.2s;
+            border: 1px solid #111111;
+            margin-top: 15px;
+        }
+        .cta-button:hover {
+            background: var(--bg-paper);
+            color: #111111;
+            border-color: var(--gov-red);
+        }
 
-        .gov-card { background: var(--bg-paper); border: 1px solid var(--border-gray); padding: 20px; margin-bottom: 15px; }
-        .gov-card h3 { margin: 0 0 10px 0; font-size: 16px; }
-        .gov-card p { margin: 0; font-size: 14px; color: #555; line-height: 1.6; }
-        .card-nr { font-size: 11px; font-weight: 700; color: var(--gov-red); margin-bottom: 4px; }
+        /* --- KODOWALNA GALERIA DLA ZAKŁADKI --- */
+        .gallery-box {
+            background: var(--bg-paper);
+            border: 1px solid var(--border-gray);
+            padding: 20px;
+        }
+        .gallery-main {
+            width: 100%;
+            height: 480px;
+            background: #151515;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 1px solid var(--border-gray);
+            overflow: hidden;
+        }
+        .gallery-main img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .gallery-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .gallery-thumb {
+            height: 75px;
+            border: 2px solid var(--border-gray);
+            cursor: pointer;
+            opacity: 0.6;
+            transition: 0.2s;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-thumb:hover {
+            opacity: 0.9;
+        }
+        .gallery-thumb.active {
+            border-color: var(--gov-red);
+            opacity: 1;
+        }
 
-        .officer-row { background: var(--bg-paper); border: 1px solid var(--border-gray); border-left: 4px solid var(--gov-red); padding: 12px 20px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .officer-role { font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700; }
-        .officer-name { font-size: 14px; text-align: right; }
-
-        .cta-button { display: inline-block; padding: 12px 25px; background: #111; color: #fff; text-decoration: none; font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700; margin-top: 15px; border: 1px solid #111; transition: 0.2s; }
-        .cta-button:hover { background: #fff; color: #111; border-color: var(--gov-red); }
-
-        /* --- SKRYPTOWALNA GALERIA MEDIÓW --- */
-        .gallery-wrapper { display: flex; flex-direction: column; gap: 15px; background: var(--bg-paper); border: 1px solid var(--border-gray); padding: 20px; }
-        .gallery-viewer { width: 100%; height: 450px; background: #111; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; border: 1px solid var(--border-gray); }
-        .gallery-viewer img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        .gallery-caption { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.75); color: #fff; padding: 12px 20px; box-sizing: border-box; font-size: 13px; }
-        
-        .gallery-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
-        .thumb { height: 70px; border: 2px solid var(--border-gray); cursor: pointer; overflow: hidden; opacity: 0.6; transition: 0.2s; display: flex; align-items: center; justify-content: center; background: #000; }
-        .thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .thumb:hover { opacity: 0.9; }
-        .thumb.active { border-color: var(--gov-red); opacity: 1; }
-
-        .gov-footer { width: 100%; background: #111; color: #fff; padding: 20px 0; font-size: 12px; border-top: 4px solid var(--gov-red); flex-shrink: 0; display: flex; justify-content: center; }
-        .footer-content { width: 100%; max-width: 860px; padding: 0 20px; display: flex; justify-content: space-between; box-sizing: border-box; }
+        /* --- NOWA URZĘDOWA STOPKA --- */
+        .gov-footer {
+            width: 100%;
+            background: #111111;
+            color: #ffffff;
+            font-size: 12px;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 4px solid var(--gov-red);
+            flex-shrink: 0; /* Zabezpieczenie przed kurczeniem stopek */
+            display: flex;
+            justify-content: center;
+        }
+        .footer-content {
+            width: 100%;
+            max-width: 910px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        @media (max-width: 600px) {
+            .footer-content { flex-direction: column; text-align: center; gap: 15px; }
+        }
+        .footer-left h4 {
+            font-family: 'Cinzel', serif;
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        .footer-left p {
+            margin: 0;
+            color: #aaaaaa;
+            font-size: 11px;
+        }
+        .footer-right {
+            text-align: right;
+            font-size: 11px;
+            color: #777777;
+            font-family: monospace;
+        }
+        @media (max-width: 600px) {
+            .footer-right { text-align: center; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="rp-top-bar">KANCELARIA SEJMU RP</div>
+    <div class="rp-top-bar">
+        Strona stworzona pod <span class="rp-highlight">Roleplay</span> – Biuletyn Informacji Publicznej Kancelarii Sejmu RP
+    </div>
 
     <div class="portal-container">
+        
         <header class="main-header">
             <img src="https://cdn.discordapp.com/attachments/1456231959930863626/1475152473978175558/330px-Sejm_RP_logo_and_wordmark.svg.png?ex=6a088d4c&is=6a073bcc&hm=d738f29e2af318f98b0bf28e213ba7fe709910cd9d15ecda218e86407e10a36e" class="godlo" alt="Logo Sejmu RP">
             <h1>KANCELARIA SEJMU</h1>
-            <h2>Biuletyn Informacyjny</h2>
+            <h2>ZINTEGROWANY SYSTEM BIULETYNU INFORMACYJNEGO</h2>
         </header>
+
     </div>
 
     <nav class="gov-nav">
-        <button class="nav-link active" onclick="openTab(event, 'tab-glowna')">Strona Główna</button>
-        <button class="nav-link" onclick="openTab(event, 'tab-zarzad')">Zarząd Kancelarii</button>
-        <button class="nav-link" onclick="openTab(event, 'tab-obwieszczenia')">Obwieszczenia</button>
-        <button class="nav-link" onclick="openTab(event, 'tab-galeria')">Galeria</button>
+        <button class="nav-link active" onclick="openTab('tab-glowna')">Strona Główna</button>
+        <button class="nav-link" onclick="openTab('tab-zarzad')">Kierownictwo i Zarząd</button>
+        <button class="nav-link" onclick="openTab('tab-obwieszczenia')">Obwieszczenia Urzędu</button>
+        <button class="nav-link" onclick="openTab('tab-galeria')">Galeria</button>
     </nav>
 
     <div class="portal-container" style="padding-top: 0;">
 
         <div id="tab-glowna" class="tab-content active">
-            <h2 class="section-title">Najnowsze Aktualności</h2>
+            <h2 class="section-title">Najwyższe Aktualności Urzędu</h2>
             
             <div class="gov-card">
-                <h3>Kwestionariusz Osobowy</h3>
-                <p>Tutaj wpisz swój własny tekst informacyjny dotyczący rekrutacji, podań lub wymagań dla graczy.</p>
-                <a href="kwestionariusz.html" class="cta-button">TWÓJ KWESTIONARIUSZ</a>
+                <div class="meta-info">Ogłoszenie Kancelarii • Artykuł I</div>
+                <h3>Elektroniczny proces przyjmowania kandydatów</h3>
+                <p>Uruchomiony został zintegrowany system rejestracji wniosków o zatrudnienie w strukturach pomocniczych parlamentu. Wszyscy obywatele posiadający czynne prawa i spełniający wymogi regulaminowe mogą przejść do panelu aplikacyjnego za pomocą poniższego systemu odsyłającego.</p>
+                
+                <a href="kwestionariusz.html" class="cta-button">
+                    URUCHOM KWESTIONARIUSZ OSOBOWY
+                </a>
             </div>
 
             <div class="gov-card">
-                <h3>Aktualność nr 2</h3>
-                <p>Tutaj możesz wpisać kolejną bieżącą informację z życia serwera / sejmu.</p>
+                <div class="meta-info">Komunikat Administracyjny • Artykuł II</div>
+                <h3>Wdrożenie nowej platformy komunikacyjnej Biuletynu</h3>
+                <p>W celu podniesienia standardów jawności życia publicznego w strukturach Roleplay, Kancelaria Sejmu przeszła na nowy model dystrybucji obwieszczeń. Zakładki nawigacyjne u góry strony ułatwiają szybki wgląd w podział kadrowy oraz decyzje administracyjne szefostwa.</p>
             </div>
         </div>
 
         <div id="tab-zarzad" class="tab-content">
-            <h2 class="section-title">Skład Osobowy</h2>
+            <h2 class="section-title">Hierarchia Kadrowa Kancelarii Sejmu RP</h2>
             
-            <div class="officer-row">
-                <span class="officer-role">Szef Kancelarii Sejmu</span>
-                <span class="officer-name">@AFKgmm (@PAWELKRUL123911)</span>
-            </div>
-            <div class="officer-row">
-                <span class="officer-role">Zastępca Szefa Kancelarii Sejmu</span>
-                <span class="officer-name">@Warchant1 (@Warchant_1), @-ˋˏ ⛧ ~ Jedynkuś ~ ⛧ ˎˊ-</span>
-            </div>
-            <div class="officer-row">
-                <span class="officer-role">Przewodniczący Zarządu</span>
-                <span class="officer-name">@Janusz Klapek | FBIPIES</span>
-            </div>
-            <div class="officer-row">
-                <span class="officer-role">Zastępca Przewodniczącego Zarządu</span>
-                <span class="officer-name">@Tyski (@LubiePlackielo2137)</span>
-            </div>
-            <div class="officer-row">
-                <span class="officer-role">Rzecznik Kancelarii Sejmu</span>
-                <span class="officer-name">@[RKS] Paweł Monka</span>
-            </div>
-            <div class="officer-row">
-                <span class="officer-role">Zarząd Kancelarii Sejmu</span>
-                <span class="officer-name">@prof. Stanisław Boguszewski, @Tyski (@LubiePlackielo2137)</span>
-            </div>
-            <div class="officer-row">
-                <span class="officer-role">Dyrektor Generalny zarządzający biurem Marszałka Sejmu</span>
-                <span class="officer-name">@Warchant1 (@Warchant_1)</span>
+            <div class="hierarchy-container">
+                
+                <div class="officer-row">
+                    <span class="officer-role">Szef Kancelarii Sejmu</span>
+                    <span class="officer-name">@AFKgmm <span class="discord-tag">(@PAWELKRUL123911)</span></span>
+                </div>
+
+                <div class="officer-row">
+                    <span class="officer-role">Zastępca Szefa Kancelarii Sejmu</span>
+                    <span class="officer-name">@Warchant1 <span class="discord-tag">(@Warchant_1)</span>, @-ˋˏ ⛧ ~ Jedynkuś ~ ⛧ ˎˊ-</span>
+                </div>
+
+                <div class="officer-row">
+                    <span class="officer-role">Przewodniczący Zarządu</span>
+                    <span class="officer-name">@Janusz Klapek | FBIPIES</span>
+                </div>
+
+                <div class="officer-row">
+                    <span class="officer-role">Zastępca Przewodniczącego Zarządu</span>
+                    <span class="officer-name">@Tyski <span class="discord-tag">(@LubiePlackielo2137)</span></span>
+                </div>
+
+                <div class="officer-row">
+                    <span class="officer-role">Rzecznik Kancelarii Sejmu</span>
+                    <span class="officer-name">@[RKS] Paweł Monka</span>
+                </div>
+
+                <div class="officer-row">
+                    <span class="officer-role">Zarząd Kancelarii Sejmu</span>
+                    <span class="officer-name">@prof. Stanisław Boguszewski, @Tyski <span class="discord-tag">(@LubiePlackielo2137)</span></span>
+                </div>
+
+                <div class="officer-row">
+                    <span class="officer-role">Dyrektor Generalny zarządzający biurem Marszałka Sejmu</span>
+                    <span class="officer-name">@Warchant1 <span class="discord-tag">(@Warchant_1)</span></span>
+                </div>
+
             </div>
         </div>
 
         <div id="tab-obwieszczenia" class="tab-content">
-            <h2 class="section-title">Wszystkie Obwieszczenia</h2>
+            <h2 class="section-title">Rejestr Oficjalnych Obwieszczeń</h2>
             
-            <div class="gov-card">
-                <div class="card-nr">Obwieszczenie nr 1</div>
-                <h3>Tytuł obwieszczenia</h3>
-                <p>Opis obwieszczenia (miejsce na Twój tekst).</p>
+            <div class="gov-card" style="border-left: 3px solid var(--gov-red);">
+                <div class="meta-info">Obwieszczenie nr 3/2026</div>
+                <h3>Zarządzenie w sprawie otwarcia naboru uzupełniającego</h3>
+                <p>Na podstawie regulaminu wewnętrznego Kancelarii Sejmu, zarządza się uruchomienie naboru do Wydziału Sekretariatu oraz Wydziału Spisu Głosowań. Formularze zgłoszeniowe przyjmowane będą do odwołania za pośrednictwem dedykowanego kwestionariusza cyfrowego.</p>
             </div>
 
-            <div class="gov-card">
-                <div class="card-nr">Obwieszczenie nr 2</div>
-                <h3>Tytuł obwieszczenia</h3>
-                <p>Opis obwieszczenia (miejsce na Twój tekst).</p>
+            <div class="gov-card" style="border-left: 3px solid var(--gov-red);">
+                <div class="meta-info">Obwieszczenie nr 2/2026</div>
+                <h3>Ustalenie nowego składu osobowego zarządu</h3>
+                <p>Działając w porozumieniu z Kierownictwem Urzędu, podaje się do wiadomości publicznej pełną lista powołań na stanowiska urzędnicze oraz zarządcze. Zmiany mają na celu optymalizację bieżącej organizacji pracy izby niższej.</p>
+            </div>
+
+            <div class="gov-card" style="border-left: 3px solid var(--gov-red);">
+                <div class="meta-info">Obwieszczenie nr 1/2026</div>
+                <h3>Wymogi dyscyplinarne dotyczące autoryzacji kont</h3>
+                <p>Wprowadza się kategoryczny nakaz podawania rzeczywistych, numerycznych identyfikatorów (ID) platform Roblox i Discord we wszystkich oficjalnych pismach kierowanych do Wydziału Kadr Kancelarii Sejmu. Dokumenty z błędnymi danymi będą odrzucane systemowo.</p>
             </div>
         </div>
 
         <div id="tab-galeria" class="tab-content">
-            <h2 class="section-title">Dokumentacja Fotograficzna Izby</h2>
+            <h2 class="section-title">Galeria Fotograficzna Kancelarii</h2>
             
-            <div class="gallery-wrapper">
-                <div class="gallery-viewer">
-                    <img id="main-gallery-img" src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1000" alt="Podgląd">
-                    <div id="main-gallery-caption" class="gallery-caption">Sala Posiedzeń Sejmu RP — Widok główny</div>
+            <div class="gallery-box">
+                <div class="gallery-main">
+                    <img id="active-photo" src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1200" alt="Główny podgląd">
+                    <div id="active-text" class="gallery-text">Sala obrad głównych Sejmu RP — Perspektywa prezydialna</div>
                 </div>
 
-                <div class="gallery-thumbs">
-                    <div class="thumb active" onclick="updateGallery(this, 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1000', 'Sala Posiedzeń Sejmu RP — Widok główny')">
+                <div class="gallery-grid">
+                    <div class="gallery-thumb active" onclick="switchPhoto(this, 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1200', 'Sala obrad głównych Sejmu RP — Perspektywa prezydialna')">
                         <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=150" alt="Miniatura 1">
                     </div>
-                    <div class="thumb" onclick="updateGallery(this, 'https://images.unsplash.com/photo-1575320181282-9afab399332c?q=80&w=1000', 'Korytarze Główne Kancelarii Sejmu')">
+                    <div class="gallery-thumb" onclick="switchPhoto(this, 'https://images.unsplash.com/photo-1575320181282-9afab399332c?q=80&w=1200', 'Główne korytarze i hole Kancelarii Sejmu')">
                         <img src="https://images.unsplash.com/photo-1575320181282-9afab399332c?q=80&w=150" alt="Miniatura 2">
                     </div>
-                    <div class="thumb" onclick="updateGallery(this, 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000', 'Gmach Parlamentu — Architektura Zewnętrzna')">
+                    <div class="gallery-thumb" onclick="switchPhoto(this, 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200', 'Budynek zewnętrzny Parlamentu Rzeczypospolitej')">
                         <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=150" alt="Miniatura 3">
                     </div>
                 </div>
@@ -189,30 +445,40 @@
 
     <footer class="gov-footer">
         <div class="footer-content">
-            <div>Kancelaria Sejmu RP</div>
-            <div>BIP v4.2</div>
+            <div class="footer-left">
+                <h4>Kancelaria Sejmu Rzeczypospolitej Polskiej</h4>
+                <p>© 2026 Kancelaria Sejmu RP. Wszelkie prawa zastrzeżone na potrzeby projektu Roleplay.</p>
+            </div>
+            <div class="footer-right">
+                BIP-KS SYSTEM v4.2<br>
+                STATUS: POŁĄCZENIE BEZPIECZNE
+            </div>
         </div>
     </footer>
 
     <script>
-        // Skrypt przełączania sekcji
-        function openTab(event, tabId) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
-            
+        // Główna funkcja nawigacji zakładkami
+        function openTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.nav-link');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
             document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+
+            const clickedButton = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(tabId));
+            if (clickedButton) clickedButton.classList.add('active');
         }
 
-        // Skrypt obsługi galerii zdjęć
-        function updateGallery(thumbnail, imageUrl, captionText) {
-            // Podmiana głównego zdjęcia i opisu
-            document.getElementById('main-gallery-img').src = imageUrl;
-            document.getElementById('main-gallery-caption').textContent = captionText;
+        // Funkcja przełączania zdjęć w galerii
+        function switchPhoto(element, url, text) {
+            document.getElementById('active-photo').src = url;
+            document.getElementById('active-text').textContent = text;
 
-            // Reset i nadanie klasy active dla klikniętej miniaturki
-            document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-            thumbnail.classList.add('active');
+            const thumbs = document.querySelectorAll('.gallery-thumb');
+            thumbs.forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
         }
     </script>
 </body>

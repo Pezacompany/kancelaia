@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kancelaria Sejmu RP — Biuletyn Informacyjny</title>
+    <title>Kancelaria Sejmu RP — Biuletyn Informacji Publicznej</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Open+Sans:wght@400;600;700&display=swap');
 
@@ -28,7 +28,7 @@
             align-items: center;
         }
 
-        /* --- URZĘDOWY PASEK ROLEPLAY (Czysty, czytelny) --- */
+        /* --- URZĘDOWY PASEK ROLEPLAY --- */
         .rp-top-bar {
             position: fixed; top: 0; left: 0; width: 100%;
             background-color: #111111; color: #ffffff; text-align: center;
@@ -42,92 +42,138 @@
         .portal-container {
             width: 100%;
             max-width: 950px;
-            padding: 40px 20px;
+            padding: 30px 20px;
             box-sizing: border-box;
         }
 
-        /* --- GODŁO I OFICJALNY NAGŁÓWEK --- */
+        /* --- OFICJALNY NAGŁÓWEK URZĘDU --- */
         .main-header {
             text-align: center;
-            border-bottom: 2px solid var(--gov-red);
-            padding-bottom: 25px;
-            margin-bottom: 35px;
+            padding-bottom: 20px;
+            position: relative;
         }
-        .godlo { width: 85px; margin-bottom: 15px; }
-        h1 { font-family: 'Cinzel', serif; font-size: 28px; margin: 0; color: #111; letter-spacing: 1px; }
+        .godlo { width: 80px; margin-bottom: 12px; }
+        h1 { font-family: 'Cinzel', serif; font-size: 26px; margin: 0; color: #111; letter-spacing: 1px; }
         h2 { font-family: 'Cinzel', serif; font-size: 13px; color: var(--gov-red); margin: 5px 0; letter-spacing: 1px; font-weight: 700; }
 
-        /* --- UKŁAD DWUKOLUMNOWY --- */
-        .grid-layout {
-            display: grid;
-            grid-template-columns: 1.8fr 1.2fr;
-            gap: 35px;
+        /* --- URZĘDOWA NAWIGACJA (ZAKŁADKI) --- */
+        .gov-nav {
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid var(--border-gray);
+            border-bottom: 2px solid var(--gov-red);
+            background: var(--bg-paper);
+            width: 100%;
+            margin-bottom: 35px;
+        }
+        .nav-link {
+            background: transparent;
+            border: none;
+            padding: 15px 25px;
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 0.5px;
+        }
+        .nav-link:hover {
+            color: var(--gov-red);
+            background: #f5f5f5;
+        }
+        .nav-link.active {
+            color: #ffffff;
+            background: var(--gov-red);
         }
 
-        @media (max-width: 768px) {
-            .grid-layout { grid-template-columns: 1fr; }
+        /* --- LOGIKA WYŚWIETLANIA ZAKŁADEK --- */
+        .tab-content {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- SEKCJE / TYTUŁY --- */
         .section-title { 
             font-family: 'Cinzel', serif; 
-            font-size: 14px; 
+            font-size: 15px; 
             font-weight: 700; 
             border-bottom: 1px solid var(--border-gray); 
-            margin: 0 0 20px 0; 
-            padding-bottom: 6px;
+            margin: 0 0 25px 0; 
+            padding-bottom: 8px;
             color: #111;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* --- ARCHITEKTURA WIZUALNA (BLOKI / KARTY) --- */
+        .gov-card {
+            background: var(--bg-paper);
+            border: 1px solid var(--border-gray);
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .gov-card h3 { margin: 0 0 12px 0; font-size: 17px; color: #111; font-weight: 700; }
+        .gov-card p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--text-muted); }
+        
+        .meta-info { 
+            font-size: 11px; 
+            font-weight: 700; 
+            color: var(--gov-red); 
+            margin-bottom: 6px; 
+            text-transform: uppercase; 
             letter-spacing: 0.5px;
         }
 
-        /* --- BLOKI OBWIESZCZEŃ --- */
-        .announcement-box {
+        /* --- STRUKTURA ZARZĄDU / KIEROWNICTWA --- */
+        .hierarchy-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .officer-row {
             background: var(--bg-paper);
             border: 1px solid var(--border-gray);
             border-left: 4px solid var(--gov-red);
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .announcement-box h3 { margin: 0 0 10px 0; font-size: 16px; color: #111; font-weight: 700; }
-        .announcement-box p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--text-muted); }
-        .announcement-date { font-size: 11px; font-weight: bold; color: var(--gov-red); margin-bottom: 6px; text-transform: uppercase; }
-
-        /* --- HIERARCHIA URZĘDNICZA (Kancelaria) --- */
-        .hierarchy-list {
-            background: var(--bg-paper);
-            border: 1px solid var(--border-gray);
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        @media (max-width: 600px) {
+            .officer-row { flex-direction: column; align-items: flex-start; gap: 5px; }
         }
-        .role-group {
-            margin-bottom: 18px;
-        }
-        .role-group:last-child { margin-bottom: 0; }
-        
-        .role-title {
+        .officer-role {
+            font-family: 'Cinzel', serif;
             font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            color: var(--gov-red);
-            margin-bottom: 4px;
-            letter-spacing: 0.5px;
+            color: #111;
         }
-        .role-members {
+        .officer-name {
             font-size: 14px;
             color: var(--text-dark);
-            line-height: 1.4;
+            font-weight: 600;
         }
-        .username-discord {
-            color: #444;
+        .discord-tag {
+            color: var(--text-muted);
             font-size: 13px;
+            font-weight: 400;
         }
 
-        /* --- PRZYCISK BIULETYNU / REKRUTACJA --- */
+        /* --- PRZYCISK URZĘDOWY (REKRUTACJA) --- */
         .cta-button {
-            display: block;
+            display: inline-block;
             text-align: center;
-            padding: 15px;
+            padding: 15px 30px;
             background: #111111;
             color: #ffffff;
             text-decoration: none;
@@ -137,7 +183,7 @@
             letter-spacing: 1px;
             transition: 0.2s;
             border: 1px solid #111111;
-            margin-bottom: 20px;
+            margin-top: 15px;
         }
         .cta-button:hover {
             background: var(--bg-paper);
@@ -149,96 +195,133 @@
 <body>
 
     <div class="rp-top-bar">
-        Strona stworzona pod <span class="rp-highlight">Roleplay</span> – oficjalny portal informacyjny Kancelarii Sejmu RP
+        Strona stworzona pod <span class="rp-highlight">Roleplay</span> – Biuletyn Informacji Publicznej Kancelarii Sejmu RP
     </div>
 
     <div class="portal-container">
         
         <header class="main-header">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Coat_of_arms_of_Poland.svg/1200px-Coat_of_arms_of_Poland.svg.png" class="godlo" alt="Godło Rzeczypospolitej Polskiej">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Coat_of_arms_of_Poland.svg/1200px-Coat_of_arms_of_Poland.svg.png" class="godlo" alt="Godło RP">
             <h1>KANCELARIA SEJMU</h1>
-            <h2>BIULETYN INFORMACJI PUBLICZNEJ URZĘDU</h2>
+            <h2>ZINTEGROWANY SYSTEM BIULETYNU INFORMACYJNEGO</h2>
         </header>
 
-        <div class="grid-layout">
-            
-            <main>
-                <h2 class="section-title">OBWIESZCZENIA KANCELARII SEJMU</h2>
-                
-                <div class="announcement-box">
-                    <div class="announcement-date">Obwieszczenie nr 3/2026</div>
-                    <h3>Otwarcie naboru do pionów urzędniczych</h3>
-                    <p>Szef Kancelarii Sejmu ogłasza uruchomienie oficjalnego procesu rekrutacyjnego dla kandydatów na urzędników państwowych. Kwestionariusze osobowe należy składać drogą elektroniczną przez system aplikacyjny dostępny w panelu bocznym.</p>
-                </div>
-
-                <div class="announcement-box">
-                    <div class="announcement-date">Obwieszczenie nr 2/2026</div>
-                    <h3>Aktualizacja struktury kadrowej urzędu</h3>
-                    <p>Niniejszym publikuje się zaktualizowany wykaz osób pełniących kluczowe funkcje administracyjne i kierownicze w strukturach Kancelarii Sejmu RP. Zmiany wchodzą w życie z dniem ogłoszenia.</p>
-                </div>
-
-                <div class="announcement-box">
-                    <div class="announcement-date">Komunikat Techniczny</div>
-                    <h3>Weryfikacja tożsamości w systemach RP</h3>
-                    <p>Przypomina się wszystkim aplikantom oraz czynnym pracownikom o obowiązku zachowania pełnej zgodności identyfikatorów numerycznych Discord oraz Roblox z danymi podawanymi w oficjalnych dokumentach.</p>
-                </div>
-            </main>
-
-            <aside>
-                <h2 class="section-title">PANEL AKCJI</h2>
-                <a href="kwestionariusz.html" class="cta-button">
-                    ZŁÓŻ KWESTIONARIUSZ OSOBOWY
-                </a>
-
-                <h2 class="section-title">KIEROWNICTWO URZĘDU</h2>
-                <div class="hierarchy-list">
-                    
-                    <div class="role-group">
-                        <div class="role-title">Szef Kancelarii Sejmu</div>
-                        <div class="role-members">@AFKgmm <span class="username-discord">(@PAWELKRUL123911)</span></div>
-                    </div>
-
-                    <div class="role-group">
-                        <div class="role-title">Zastępca Szefa Kancelarii Sejmu</div>
-                        <div class="role-members">
-                            @Warchant1 <span class="username-discord">(@Warchant_1)</span>,<br>
-                            @-ˋˏ ⛧ ~ Jedynkuś ~ ⛧ ˎˊ-
-                        </div>
-                    </div>
-
-                    <div class="role-group">
-                        <div class="role-title">Przewodniczący Zarządu</div>
-                        <div class="role-members">@Janusz Klapek | FBIPIES</div>
-                    </div>
-
-                    <div class="role-group">
-                        <div class="role-title">Zastępca Przewodniczącego Zarządu</div>
-                        <div class="role-members">@Tyski <span class="username-discord">(@LubiePlackielo2137)</span></div>
-                    </div>
-
-                    <div class="role-group">
-                        <div class="role-title">Rzecznik Kancelarii Sejmu</div>
-                        <div class="role-members">@[RKS] Paweł Monka</div>
-                    </div>
-
-                    <div class="role-group">
-                        <div class="role-title">Zarząd Kancelarii Sejmu</div>
-                        <div class="role-members">
-                            @prof. Stanisław Boguszewski,<br>
-                            @Tyski <span class="username-discord">(@LubiePlackielo2137)</span>
-                        </div>
-                    </div>
-
-                    <div class="role-group">
-                        <div class="role-title">Dyrektor Generalny biura Marszałka</div>
-                        <div class="role-members">@Warchant1 <span class="username-discord">(@Warchant_1)</span></div>
-                    </div>
-
-                </div>
-            </aside>
-
-        </div>
     </div>
 
+    <nav class="gov-nav">
+        <button class="nav-link active" onclick="openTab('tab-glowna')">Strona Główna</button>
+        <button class="nav-link" onclick="openTab('tab-zarzad')">Kierownictwo i Zarząd</button>
+        <button class="nav-link" onclick="openTab('tab-obwieszczenia')">Obwieszczenia Urzędu</button>
+    </nav>
+
+    <div class="portal-container" style="padding-top: 0;">
+
+        <div id="tab-glowna" class="tab-content active">
+            <h2 class="section-title">Najwyższe Aktualności Urzędu</h2>
+            
+            <div class="gov-card">
+                <div class="meta-info">Ogłoszenie Kancelarii • Artykuł I</div>
+                <h3>Elektroniczny proces przyjmowania kandydatów</h3>
+                <p>Uruchomiony został zintegrowany system rejestracji wniosków o zatrudnienie w strukturach pomocniczych parlamentu. Wszyscy obywatele posiadający czynne prawa i spełniający wymogi regulaminowe mogą przejść do panelu aplikacyjnego za pomocą poniższego systemu odsyłającego.</p>
+                
+                <a href="kwestionariusz.html" class="cta-button">
+                    URUCHOM KWESTIONARIUSZ OSOBOWY
+                </a>
+            </div>
+
+            <div class="gov-card">
+                <div class="meta-info">Komunikat Administracyjny • Artykuł II</div>
+                <h3>Wdrożenie nowej platformy komunikacyjnej Biuletynu</h3>
+                <p>W celu podniesienia standardów jawności życia publicznego w strukturach Roleplay, Kancelaria Sejmu przeszła na nowy model dystrybucji obwieszczeń. Zakładki nawigacyjne u góry strony ułatwiają szybki wgląd w podział kadrowy oraz decyzje administracyjne szefostwa.</p>
+            </div>
+        </div>
+
+
+        <div id="tab-zarzad" class="tab-content">
+            <h2 class="section-title">Hierarchia Kadrowa Kancelarii Sejmu RP</h2>
+            
+            <div class="hierarchy-container">
+                
+                <div class="officer-row">
+                    <span class="officer-role">Szef Kancelarii Sejmu</span>
+                    <span class="officer-name">@AFKgmm <span class="discord-tag">(@PAWELKRUL123911)</span></span>
+                </div>
+
+                <div class="officer-row">
+                    <span class="officer-role">Zastępca Szefa Kancelarii Sejmu</span>
+                    <span class="officer-name">@Warchant1 <span class="discord-tag">(@Warchant_1)</span>, @-ˋˏ ⛧ ~ Jedynkuś ~ ⛧ ˎˊ-</span>
+                </div>
+
+                <div class="officer-row">
+                    <span class="officer-role">Przewodniczący Zarządu</span>
+                    <span class="officer-name">@Janusz Klapek | FBIPIES</span>
+                </div>
+
+                <div class="officer-row">
+                    <span class="officer-role">Zastępca Przewodniczącego Zarządu</span>
+                    <span class="officer-name">@Tyski <span class="discord-tag">(@LubiePlackielo2137)</span></span>
+                </div>
+
+                <div class="officer-row">
+                    <span class="officer-role">Rzecznik Kancelarii Sejmu</span>
+                    <span class="officer-name">@[RKS] Paweł Monka</span>
+                </div>
+
+                <div class="officer-row">
+                    <span class="officer-role">Zarząd Kancelarii Sejmu</span>
+                    <span class="officer-name">@prof. Stanisław Boguszewski, @Tyski <span class="discord-tag">(@LubiePlackielo2137)</span></span>
+                </div>
+
+                <div class="officer-row">
+                    <span class="officer-role">Dyrektor Generalny zarządzający biurem Marszałka Sejmu</span>
+                    <span class="officer-name">@Warchant1 <span class="discord-tag">(@Warchant_1)</span></span>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div id="tab-obwieszczenia" class="tab-content">
+            <h2 class="section-title">Rejestr Oficjalnych Obwieszczeń</h2>
+            
+            <div class="gov-card" style="border-left: 3px solid var(--gov-red);">
+                <div class="meta-info">Obwieszczenie nr 3/2026</div>
+                <h3>Zarządzenie w sprawie otwarcia naboru uzupełniającego</h3>
+                <p>Na podstawie regulaminu wewnętrznego Kancelarii Sejmu, zarządza się uruchomienie naboru do Wydziału Sekretariatu oraz Wydziału Spisu Głosowań. Formularze zgłoszeniowe przyjmowane będą do odwołania za pośrednictwem dedykowanego kwestionariusza cyfrowego.</p>
+            </div>
+
+            <div class="gov-card" style="border-left: 3px solid var(--gov-red);">
+                <div class="meta-info">Obwieszczenie nr 2/2026</div>
+                <h3>Ustalenie nowego składu osobowego zarządu</h3>
+                <p>Działając w porozumieniu z Kierownictwem Urzędu, podaje się do wiadomości publicznej pełną listę powołań na stanowiska urzędnicze oraz zarządcze. Zmiany mają na celu optymalizację bieżącej organizacji pracy izby niższej.</p>
+            </div>
+
+            <div class="gov-card" style="border-left: 3px solid var(--gov-red);">
+                <div class="meta-info">Obwieszczenie nr 1/2026</div>
+                <h3>Wymogi dyscyplinarne dotyczące autoryzacji kont</h3>
+                <p>Wprowadza się kategoryczny nakaz podawania rzeczywistych, numerycznych identyfikatorów (ID) platform Roblox i Discord we wszystkich oficjalnych pismach kierowanych do Wydziału Kadr Kancelarii Sejmu. Dokumenty z błędnymi danymi będą odrzucane systemowo.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function openTab(tabId) {
+            // Ukryj wszystkie zakładki
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Odbierz klasę 'active' wszystkim przyciskom nawigacji
+            const buttons = document.querySelectorAll('.nav-link');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Pokaż wybraną zakładkę
+            document.getElementById(tabId).classList.add('active');
+
+            // Nadaj klasę 'active' przyciskowi, który został kliknięty
+            const clickedButton = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(tabId));
+            if (clickedButton) clickedButton.classList.add('active');
+        }
+    </script>
 </body>
 </html>
